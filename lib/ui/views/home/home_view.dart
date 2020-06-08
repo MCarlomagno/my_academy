@@ -8,28 +8,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
-        var _scaffoldKey = GlobalKey<ScaffoldState>();
         return Scaffold(
-          backgroundColor: Colors.white,
-          key: _scaffoldKey,
-          body: model.isBusy
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Center(
-                  child: Text(model.data),
-                ),
+          body: model.currentChild,
           bottomNavigationBar: BottomNavigationBar(
+            onTap: model.onTap, 
+            currentIndex: model.currentIndex,
             items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home'),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.business),
-                title: Text('Business'),
-              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 title: Text('Search'),
@@ -37,6 +23,14 @@ class HomeView extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Icon(Icons.school),
                 title: Text('School'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.extension),
+                title: Text('Teach'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.equalizer),
+                title: Text('Statistics'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),

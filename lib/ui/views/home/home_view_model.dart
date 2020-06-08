@@ -1,19 +1,33 @@
-import 'package:my_academy/api/sample_service.dart';
-import 'package:my_academy/app/locator.dart';
+import 'package:flutter/material.dart';
+import 'package:my_academy/ui/views/profile/profile_view.dart';
+import 'package:my_academy/ui/views/school/school_view.dart';
+import 'package:my_academy/ui/views/search/search_view.dart';
+import 'package:my_academy/ui/views/statistics/statistics_view.dart';
+import 'package:my_academy/ui/views/teach/teach_view.dart';
 import 'package:stacked/stacked.dart';
 
 
 class HomeViewModel extends BaseViewModel {
 
-  //services injection
-  final SampleService _sampleService = locator<SampleService>();
+  /**
+   * 0 : [SearchView]: To browse courses across all the platform
+   * 1 : [SchoolView]: To see actual courses.
+   * 2 : [TeachView]: To start creating courses or see current courses created.
+   * 3 : [StatisticsView]: To see courses finished, billings, etc
+   * 4 : [ProfileView]: User profile
+   */
+  final List<Widget> _children = [SearchView(), SchoolView(), TeachView(), StatisticsView(), ProfileView()];
 
-  String _data = "";
-  String get data => this._data;
+  int _currentIndex = 0;
+  int get currentIndex => this._currentIndex;
 
-  Future<void> runSampleRequest() async {
-    setBusy(true);
-    this._data = await _sampleService.sampleHttpRequest();
-    setBusy(false);
+  Widget get currentChild => _children[this.currentIndex];
+
+  onModelReady() {}
+
+  void onTap(int index) {
+    this._currentIndex = index;
+    notifyListeners();
   }
+
 }
