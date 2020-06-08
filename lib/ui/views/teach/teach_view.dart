@@ -7,11 +7,34 @@ class TeachView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<TeachViewModel>.nonReactive(
+    return ViewModelBuilder<TeachViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
-          body: Center(
-            child: Text("TeachView"),
+          body: SafeArea(
+            child: Form(
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: model.titleController,
+                    decoration: InputDecoration(
+                      labelText: 'Titulo',
+                    ),
+                  ),
+                  TextFormField(
+                    controller: model.descriptionController,
+                    decoration: InputDecoration(
+                      labelText: 'Descripcion',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            isExtended: true,
+            onPressed: model.onCreate,
+            label: Text("Crear curso"),
+            icon: Icon(Icons.add),
           ),
         );
       },

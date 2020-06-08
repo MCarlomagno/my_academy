@@ -7,11 +7,22 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SearchViewModel>.nonReactive(
+    return ViewModelBuilder<SearchViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
         return Scaffold(
-          body: Center(
-            child: Text("SearchView"),
+          body: ListView.builder(
+            // Let the ListView know how many items it needs to build.
+            itemCount: model.courses.length,
+            // Provide a builder function. This is where the magic happens.
+            // Convert each item into a widget based on the type of item it is.
+            itemBuilder: (context, index) {
+              final item = model.courses[index];
+              return ListTile(
+                title: Text(item.title),
+                subtitle: Text(item.description),
+              );
+            },
           ),
         );
       },

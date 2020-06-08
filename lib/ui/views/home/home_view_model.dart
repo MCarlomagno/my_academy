@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/api/courses_service.dart';
+import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/ui/views/profile/profile_view.dart';
 import 'package:my_academy/ui/views/school/school_view.dart';
 import 'package:my_academy/ui/views/search/search_view.dart';
@@ -17,13 +19,15 @@ class HomeViewModel extends BaseViewModel {
    * 4 : [ProfileView]: User profile
    */
   final List<Widget> _children = [SearchView(), SchoolView(), TeachView(), StatisticsView(), ProfileView()];
+  List<Widget> get children => _children;
 
   int _currentIndex = 0;
   int get currentIndex => this._currentIndex;
 
-  Widget get currentChild => _children[this.currentIndex];
 
-  onModelReady() {}
+
+  onModelReady() {
+  }
 
   void onTap(int index) {
     this._currentIndex = index;

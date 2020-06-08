@@ -11,7 +11,10 @@ class HomeView extends StatelessWidget {
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
         return Scaffold(
-          body: model.currentChild,
+          body: IndexedStack(
+              index: model.currentIndex,
+              children: model.children,
+            ),
           bottomNavigationBar: BottomNavigationBar(
             onTap: model.onTap, 
             currentIndex: model.currentIndex,
