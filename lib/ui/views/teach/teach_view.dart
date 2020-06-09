@@ -11,22 +11,15 @@ class TeachView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           body: SafeArea(
-            child: Form(
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    controller: model.titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Titulo',
-                    ),
+            child: Center(
+              child: Card(
+                child: Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[Text('No hay cursos creados')],
                   ),
-                  TextFormField(
-                    controller: model.descriptionController,
-                    decoration: InputDecoration(
-                      labelText: 'Descripcion',
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
