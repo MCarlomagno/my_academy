@@ -18,7 +18,7 @@ class HomeViewModel extends BaseViewModel {
    * 3 : [StatisticsView]: To see courses finished, billings, etc
    * 4 : [ProfileView]: User profile
    */
-  final List<Widget> _children = [SearchView(), SchoolView(), TeachView(), StatisticsView(), ProfileView()];
+  final List<Widget> _children = [SearchView(), SchoolView(), TeachView(), ProfileView()];
   List<Widget> get children => _children;
 
   int _currentIndex = 0;

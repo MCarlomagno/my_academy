@@ -32,10 +32,10 @@ class HomeView extends StatelessWidget {
                 icon: Icon(Icons.extension),
                 title: Text('Crear'),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.equalizer),
-                title: Text('Estadisticas'),
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.equalizer),
+              //   title: Text('Estadisticas'),
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 title: Text('Perfil'),

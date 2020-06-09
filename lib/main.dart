@@ -15,6 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       darkTheme: ThemeData(
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.iOS: _createTransition(),
+            TargetPlatform.android: _createTransition(),
+          },
+        ),
         brightness: Brightness.dark,
         primaryColor: Color(0xFF212121),
         accentColor: Color(0xFF00bfa5),
@@ -42,4 +48,8 @@ class MyApp extends StatelessWidget {
       navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
+}
+
+PageTransitionsBuilder _createTransition() {
+  return CupertinoPageTransitionsBuilder();
 }
