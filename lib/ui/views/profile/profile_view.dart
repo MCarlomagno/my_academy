@@ -42,6 +42,9 @@ class ProfileView extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,
                 ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),

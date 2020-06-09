@@ -9,4 +9,5 @@ class ProfileViewModel extends BaseViewModel {
 
   String _email = 'marcoscarlomagno1@gmail.com';
   String get email => this._email;
+
 }
