@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/ui/views/teach/created-courses-list/created_courses_list_view.dart';
 import 'package:my_academy/ui/views/teach/teach_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -10,18 +11,25 @@ class TeachView extends StatelessWidget {
     return ViewModelBuilder<TeachViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
-          body: SafeArea(
-            child: Center(
-              child: Card(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[Text('No hay cursos creados')],
+          appBar: AppBar(
+            title: Text('Cursos creados'),
+            leading: Container(),
+            actions: <Widget>[
+              PopupMenuButton(
+                icon: Icon(Icons.settings),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 1,
+                    child: Text(
+                      "Configuracion",
+                    ),
                   ),
-                ),
+                ],
               ),
-            ),
+            ],
+          ),
+          body: Container(
+            child: CreatedCoursesListView(courses: model.createdCourses),
           ),
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,

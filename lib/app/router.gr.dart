@@ -9,13 +9,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:my_academy/ui/views/home/home_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart';
+import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create_course_detail_view.dart';
 
 abstract class Routes {
   static const homeViewRoute = '/home-view-route';
   static const createCourseView = '/create-course-view';
+  static const createCourseDetailView = '/create-course-detail-view';
   static const all = {
     homeViewRoute,
     createCourseView,
+    createCourseDetailView,
   };
 }
 
@@ -50,6 +53,16 @@ class Router extends RouterBase {
           builder: (context) => CreateCourseView(key: typedArgs.key),
           settings: settings,
         );
+      case Routes.createCourseDetailView:
+        if (hasInvalidArgs<CreateCourseDetailViewArguments>(args)) {
+          return misTypedArgsRoute<CreateCourseDetailViewArguments>(args);
+        }
+        final typedArgs = args as CreateCourseDetailViewArguments ??
+            CreateCourseDetailViewArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => CreateCourseDetailView(key: typedArgs.key),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -70,4 +83,10 @@ class HomeViewArguments {
 class CreateCourseViewArguments {
   final Key key;
   CreateCourseViewArguments({this.key});
+}
+
+//CreateCourseDetailView arguments holder class
+class CreateCourseDetailViewArguments {
+  final Key key;
+  CreateCourseDetailViewArguments({this.key});
 }
