@@ -20,12 +20,12 @@ class ModuleOnListView extends StatelessWidget {
               children: <Widget>[
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Flexible(
                       child: Text(module.title,
                           style: Theme.of(context).textTheme.headline5, overflow: TextOverflow.fade, softWrap: false),
                     ),
-                    Spacer(),
                     SizedBox(
                       width: 30,
                       child: PopupMenuButton(

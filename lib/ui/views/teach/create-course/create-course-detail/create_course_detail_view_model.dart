@@ -7,7 +7,7 @@ class CreateCourseDetailViewModel extends BaseViewModel {
   Class clase2 = Class(title: 'Clase 2', description: 'Descripcion clase 2');
   Class clase3 = Class(title: 'Clase 3', description: 'Descripcion clase 3');
   Module sampleModule = Module(
-      title: 'Un modulo increible',
+      title: 'Un modulo increible asdasd asdasd asd',
       description: 'Este es un modulo excelente que contiene una lista de clases para aprender!',
       classes: []);
   Module sampleModule2 = Module(
