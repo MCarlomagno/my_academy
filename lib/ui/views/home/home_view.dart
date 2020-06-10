@@ -12,6 +12,7 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           body: IndexedStack(
+              key: key,
               index: model.currentIndex,
               children: model.children,
             ),

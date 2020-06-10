@@ -33,6 +33,9 @@ dependencies:
   stacked_services: 0.3.2+1
   #http
   http: ^0.12.1
+  #media
+  video_player:
+  image_picker:
   
 
   #inversion of control

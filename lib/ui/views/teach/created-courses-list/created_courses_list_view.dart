@@ -11,7 +11,7 @@ class CreatedCoursesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreatedCoursesListViewModel>.reactive(
+    return ViewModelBuilder<CreatedCoursesListViewModel>.nonReactive(
             builder: (context, model, child) {
         return ListView.builder(
                   // Let the ListView know how many items it needs to build.

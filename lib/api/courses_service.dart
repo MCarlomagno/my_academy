@@ -23,19 +23,23 @@ class CoursesService {
                               Course(title: 'Sample title7', description: 'Sample description7',modules: [])];
   int totalUserCourses = 3;
 
-  List<Course> getAllCourses() {
+  Future<List<Course>> getAllCourses() async {
+    await Future.delayed(Duration(seconds: 3));
     return allCoursesSampleData;
   }
 
-  List<Course> getUserCourses() {
+  Future<List<Course>> getUserCreatedCourses() async {
+    await Future.delayed(Duration(seconds: 3));
     return userCourses;
   }
 
-  int getTotalUserCourses() {
+  Future<int> getTotalUserCourses() async {
+    await Future.delayed(Duration(seconds: 3));
     return totalUserCourses;
   }
 
-  addCourse(Course course) {
+  Future<void> addCourse(Course course) async {
+    await Future.delayed(Duration(seconds: 3));
     print('added couse: title: '+ course.title + ', description: ' + course.description);
     allCoursesSampleData.add(course);
   }

@@ -9,6 +9,7 @@ class TeachView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<TeachViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
         return Scaffold(
           appBar: AppBar(
@@ -29,7 +30,11 @@ class TeachView extends StatelessWidget {
             ],
           ),
           body: Container(
-            child: CreatedCoursesListView(courses: model.createdCourses),
+            child: model.isBusy
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : CreatedCoursesListView(courses: model.createdCourses),
           ),
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,

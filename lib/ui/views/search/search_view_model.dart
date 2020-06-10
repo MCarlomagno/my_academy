@@ -10,9 +10,12 @@ class SearchViewModel extends BaseViewModel {
   
   CoursesService _coursesService = locator<CoursesService>();
 
-  onModelReady() {
-    this._courses = _coursesService.getAllCourses();
-    notifyListeners();
+  onModelReady() async {
+    setBusy(true);
+    print('busy en true');
+    this._courses = await _coursesService.getAllCourses();
+    print('busy en false');
+    setBusy(false);
   }
 
   
