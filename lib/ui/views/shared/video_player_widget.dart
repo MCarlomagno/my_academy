@@ -124,7 +124,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         value: videoPositionInMiliseconds.toDouble(),
                         onChanged: (value) => {},
                         min: 0.0,
-                        max: _controller.value.duration.inMilliseconds.toDouble(),
+                        max: _controller.value.duration != null
+                            ? _controller.value.duration.inMilliseconds.toDouble()
+                            : 0,
                         label: 'Video',
                       ),
                     ],
