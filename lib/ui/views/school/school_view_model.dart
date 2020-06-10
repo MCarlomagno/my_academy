@@ -10,9 +10,10 @@ class SchoolViewModel extends BaseViewModel {
   
   CoursesService _coursesService = locator<CoursesService>();
 
-  onModelReady() {
-    this._myCourses = _coursesService.getUserCourses();
-    notifyListeners();
+  onModelReady() async {
+    setBusy(true);
+    this._myCourses = await _coursesService.getUserCreatedCourses();
+    setBusy(false);
   }
 
 }

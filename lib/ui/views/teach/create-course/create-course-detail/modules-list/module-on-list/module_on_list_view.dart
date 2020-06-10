@@ -80,7 +80,7 @@ class ModuleOnListView extends StatelessWidget {
                 ),
                 RaisedButton(
                   color: Theme.of(context).accentColor,
-                  onPressed: () {},
+                  onPressed: () => model.openClassDetail(),
                   child: Text('Ver'),
                 ),
               ],
