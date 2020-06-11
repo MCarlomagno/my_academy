@@ -8,13 +8,13 @@ import 'package:stacked/stacked.dart';
 
 class HomeViewModel extends BaseViewModel {
 
-  /**
-   * 0 : [SearchView]: To browse courses across all the platform
-   * 1 : [SchoolView]: To see actual courses.
-   * 2 : [TeachView]: To start creating courses or see current courses created.
-   * 3 : [StatisticsView]: To see courses finished, billings, etc
-   * 4 : [ProfileView]: User profile
-   */
+  ///
+  ///0 : [SearchView]: To browse courses across all the platform
+  ///1 : [SchoolView]: To see actual courses.
+  ///2 : [TeachView]: To start creating courses or see current courses created.
+  ///3 : [StatisticsView]: To see courses finished, billings, etc
+  ///4 : [ProfileView]: User profile
+  ///
   final List<Widget> _children = [SearchView(),SchoolView(), TeachView(), ProfileView()];
   List<Widget> get children => _children;
 

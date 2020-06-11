@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_academy/ui/views/shared/video_player_widget.dart';
+import 'package:flutter/services.dart';
+import 'package:my_academy/ui/views/shared/add_video/add_video_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'class_edit_view_model.dart';
@@ -26,10 +27,7 @@ class ClassEditView extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                  child: VideoPlayerScreen(),
-                ),
+                AddVideoView(),
                 Container(
                   padding: EdgeInsets.all(15),
                   child: TextField(

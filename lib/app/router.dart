@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:my_academy/ui/views/home/home_view.dart';
+import 'package:my_academy/ui/views/shared/video_camera.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create_course_detail_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/class-edit/class_edit_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart';
@@ -10,4 +11,5 @@ class $Router {
   CreateCourseView createCourseView;
   CreateCourseDetailView createCourseDetailView;
   ClassEditView classEditView;
+  CameraApp cameraApp;
 }
