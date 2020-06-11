@@ -11,17 +11,20 @@ import 'package:my_academy/ui/views/home/home_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create_course_detail_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/class-edit/class_edit_view.dart';
+import 'package:my_academy/ui/views/shared/video_camera.dart';
 
 abstract class Routes {
   static const homeViewRoute = '/home-view-route';
   static const createCourseView = '/create-course-view';
   static const createCourseDetailView = '/create-course-detail-view';
   static const classEditView = '/class-edit-view';
+  static const cameraApp = '/camera-app';
   static const all = {
     homeViewRoute,
     createCourseView,
     createCourseDetailView,
     classEditView,
+    cameraApp,
   };
 }
 
@@ -74,6 +77,11 @@ class Router extends RouterBase {
             args as ClassEditViewArguments ?? ClassEditViewArguments();
         return MaterialPageRoute<dynamic>(
           builder: (context) => ClassEditView(key: typedArgs.key),
+          settings: settings,
+        );
+      case Routes.cameraApp:
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => CameraApp(),
           settings: settings,
         );
       default:

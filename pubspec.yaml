@@ -36,6 +36,7 @@ dependencies:
   #media
   video_player:
   image_picker:
+  camera:
   
 
   #inversion of control
