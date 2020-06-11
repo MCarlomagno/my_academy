@@ -13,13 +13,28 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+  // Video player controller
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
+
+  //To pick the video from gallery
   final picker = ImagePicker();
   File videoFile;
+
+  // shows play/pause button and video progress
   var showControls = true;
+  // timer for hide controls
   Timer timer;
+
+  // video progress
   int videoPositionInMiliseconds = 0;
+
+  // stream that listen the controller.position value
+  Stream<Duration> streamToProgress;
+  StreamSubscription streamSubscriptionToProgress;
+
+  // if the user pressed mute, this variable record the last volume used
+  double lastVolume = 1.0;
 
   @override
   void initState() {
@@ -29,14 +44,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   @override
-  void dispose() {
-    // Ensure disposing of the VideoPlayerController to free up resources.
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    //controller progress stream
+    if (this._controller?.position != null) {
+      streamToProgress = this._controller.position.asStream();
+      startStreaming();
+    }
+
     return Scaffold(
       // Use a FutureBuilder to display a loading spinner while waiting for the
       // VideoPlayerController to finish initializing.
@@ -96,6 +110,40 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   visible: showControls,
                   child: Column(
                     children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            IconButton(
+                              icon: Icon(_controller.value.volume == 0.0 ? Icons.volume_off : Icons.volume_up),
+                              onPressed: () {
+                                if (_controller.value.volume != 0) {
+                                  setState(() {
+                                    _controller.setVolume(0.0);
+                                  });
+                                } else {
+                                  _controller.setVolume(lastVolume);
+                                }
+                              },
+                            ),
+                            Slider(
+                              inactiveColor: Colors.grey[400],
+                              activeColor: Theme.of(context).accentColor,
+                              onChanged: (val) {
+                                lastVolume = val;
+                                onTapScreen();
+                                setState(() {
+                                  _controller.setVolume(val);
+                                });
+                              },
+                              value: _controller.value.volume,
+                              min: 0.0,
+                              max: 1.0,
+                            ),
+                          ],
+                        ),
+                      ),
                       Spacer(),
                       IconButton(
                         iconSize: 50,
@@ -116,16 +164,38 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         // Display the correct icon depending on the state of the player.
                         icon: Icon(
                           _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                          color: Colors.white,
                         ), // This trailing comma makes auto-formatting nicer for build methods.
                       ),
                       Spacer(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(_printDuration(Duration(milliseconds: videoPositionInMiliseconds))),
+                            Text(_printDuration(_controller.value.duration)),
+                          ],
+                        ),
+                      ),
                       Slider(
+                        inactiveColor: Colors.grey[400],
                         activeColor: Theme.of(context).accentColor,
                         value: videoPositionInMiliseconds.toDouble(),
-                        onChanged: (value) => {},
+                        onChanged: (value) {
+                          onTapScreen();
+                          var duration = Duration(milliseconds: value.floor());
+                          _controller.seekTo(duration);
+                          setState(() {
+                            if (_controller.value.duration.inMilliseconds.toDouble() > value.floor().toDouble()) {
+                              videoPositionInMiliseconds = value.floor();
+                            }
+                          });
+                        },
                         min: 0.0,
                         max: _controller.value.duration != null
-                            ? _controller.value.duration.inMilliseconds.toDouble()
+                            ? _controller.value.duration.inMilliseconds
+                                .toDouble() // added 100 milisec to maintain the max value always upper than actual value
                             : 0,
                         label: 'Video',
                       ),
@@ -135,6 +205,40 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Ensure disposing of the VideoPlayerController to free up resources.
+    timer.cancel();
+    streamSubscriptionToProgress.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String _printDuration(Duration duration) {
+    if (duration != null) {
+      String twoDigits(int n) {
+        if (n >= 10) return "$n";
+        return "0$n";
+      }
+
+      String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+      String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+      return "$twoDigitMinutes:$twoDigitSeconds";
+    }else {
+      return "00:00";
+    }
+  }
+
+  startStreaming() {
+    streamSubscriptionToProgress = streamToProgress.listen((event) {
+      setState(() {
+        if (_controller.value.duration.inMilliseconds.toDouble() > event.inMilliseconds.toDouble()) {
+          videoPositionInMiliseconds = event.inMilliseconds;
+        }
+      });
+    });
   }
 
   Future getVideo() async {
@@ -148,7 +252,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _initializeVideoPlayerFuture = _controller.initialize();
 
         // Use the controller to loop the video.
-        _controller.setLooping(true);
+        _controller.setLooping(false);
       });
     });
   }
@@ -161,23 +265,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       timer = Timer(const Duration(seconds: 3), () {
         setState(() {
           showControls = false;
-          // Here you can write your code for open new view
         });
       });
     } else {
-      _controller.position.then((value) {
-        setState(() {
-          videoPositionInMiliseconds = value.inMilliseconds;
-        });
-      });
       setState(() {
         showControls = true;
-        // Here you can write your code for open new view
       });
       timer = Timer(const Duration(seconds: 3), () {
         setState(() {
           showControls = false;
-          // Here you can write your code for open new view
         });
       });
     }
