@@ -37,6 +37,7 @@ class SampleDataBase {
     this._lastCourseId++;
     newCourse.id = this._lastCourseId;
     newCourse.modules = [];
+    newCourse.ownerUserId = currentUserId;
     this._courses.add(newCourse);
     return newCourse;
   }
