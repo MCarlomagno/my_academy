@@ -1,8 +1,9 @@
-import 'package:my_academy/api/classes_service.dart';
-import 'package:my_academy/api/courses_service.dart';
-import 'package:my_academy/api/modules_service.dart';
-import 'package:my_academy/api/sample_service.dart';
+import 'package:my_academy/services/api/classes_service.dart';
+import 'package:my_academy/services/api/courses_service.dart';
+import 'package:my_academy/services/api/modules_service.dart';
+import 'package:my_academy/services/api/sample_service.dart';
 import 'package:injectable/injectable.dart';
+import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 @module
@@ -19,4 +20,6 @@ abstract class ThirdPartyServicesModule {
   ClassesService get classesService;
   @lazySingleton
   ModulesService get modulesService;
+  @lazySingleton
+  VideoDataService get videoDataService;
 }

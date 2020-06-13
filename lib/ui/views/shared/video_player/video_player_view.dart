@@ -78,6 +78,11 @@ class VideoPlayerView extends StatelessWidget {
                             min: 0.0,
                             max: 1.0,
                           ),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(Icons.close),
+                            onPressed: () => model.onCloseButtonPressed(),
+                          )
                         ],
                       ),
                     ),

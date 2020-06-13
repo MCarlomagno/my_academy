@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
 import 'package:my_academy/ui/views/shared/video_player/video_player_view.dart';
 import 'package:stacked/stacked.dart';
 import 'add_video_view_model.dart';
@@ -20,15 +21,36 @@ class AddVideoView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     RaisedButton(
-                      child: Text("Agregar video"),
-                      color: Theme.of(context).accentColor,
+                      child: Padding(
+                        child: Icon(
+                          Icons.file_upload,
+                          size: 50,
+                        ),
+                        padding: EdgeInsets.all(20.0),
+                      ),
+                      shape: CircleBorder(
+                        side: BorderSide(color: Colors.white),
+                      ),
+                      color: Colors.transparent,
                       onPressed: () {
                         model.getVideoFromGallery();
                       },
                     ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     RaisedButton(
-                      child: Text("Filmar"),
-                      color: Theme.of(context).accentColor,
+                      child: Padding(
+                        child: Icon(
+                          Icons.videocam,
+                          size: 50,
+                        ),
+                        padding: EdgeInsets.all(20.0),
+                      ),
+                      shape: CircleBorder(
+                        side: BorderSide(color: Colors.white),
+                      ),
+                      color: Colors.transparent,
                       onPressed: () {
                         model.getVideoFromCamera();
                       },
@@ -37,7 +59,7 @@ class AddVideoView extends StatelessWidget {
                 ),
               ),
               Visibility(
-                visible: model.videoLoaded,
+                visible: model.videoLoaded && model.videoPlayerOpened,
                 child: VideoPlayerView(
                   file: model.videoFile,
                 ),
