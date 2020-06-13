@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'create_course_view_model.dart';
+import 'create_module_view_model.dart';
 
-class CreateCourseView extends StatelessWidget {
-  const CreateCourseView({Key key}) : super(key: key);
+class CreateModuleView extends StatelessWidget {
+  const CreateModuleView({Key key, @required this.courseId}) : super(key: key);
+  final int courseId;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateCourseViewModel>.reactive(
+    return ViewModelBuilder<CreateModuleViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(this.courseId),
       builder: (context, model, child) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('Crear curso'),
+            title: Text('Crear modulo'),
             actions: <Widget>[
               IconButton(
                 icon: Icon(
-                  Icons.send,
+                  Icons.check,
                   color: Theme.of(context).accentColor,
                 ),
                 onPressed: () => model.onConfirm(),
@@ -57,7 +59,7 @@ class CreateCourseView extends StatelessWidget {
           ),
         );
       },
-      viewModelBuilder: () => CreateCourseViewModel(),
+      viewModelBuilder: () => CreateModuleViewModel(),
     );
   }
 }

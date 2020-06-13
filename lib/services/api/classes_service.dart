@@ -1,17 +1,18 @@
+import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/class_model.dart';
+import 'package:my_academy/services/api/sample_database.dart';
 
 class ClassesService {
-  List<Class> allClassesSampleData = [
-    Class(title: 'Clase 1', description: 'Descripcion de la clase 1, esta clase tiene una descropcin'),
-    Class(title: 'Clase 2 asdasdads', description: 'Descripcion de la clase 1, esta clase tiene una descropcin'),
-    Class(title: 'Clas', description: 'Descripcion de la clase 1, esta clase tiene una descropcin'),
-    Class(title: 'Clase asdasd asdasd asd', description: 'Descripcion de la clase 1, esta clase tiene una descropcin'),
-    Class(title: 'Clase asd', description: 'Descripcion de la clase 1, esta clase tiene una descropcin'),
-  ];
+  SampleDataBase _sampleDataBase = locator<SampleDataBase>();
 
-  Future<List<Class>> getAllCourses() async {
-    await Future.delayed(Duration(seconds: 1));
-    return allClassesSampleData;
+  Future<List<Class>> getClassesByModuleId(int moduleId) async {
+    List<Class> classes = _sampleDataBase.getClassesByModuleId(moduleId);
+    await Future.delayed(Duration(seconds: 3));
+    return classes;
   }
 
+  Future<Class> createClass(Class currentClass) async {
+    await Future.delayed(Duration(seconds: 3));
+    return _sampleDataBase.createClass(currentClass);
+  }
 }

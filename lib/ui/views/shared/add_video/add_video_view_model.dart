@@ -27,6 +27,7 @@ class AddVideoViewModel extends ReactiveViewModel {
     PickedFile pickedFile = await _picker.getVideo(source: ImageSource.gallery);
     if (pickedFile != null) {
       _videoFile = File(pickedFile.path);
+      _videoDataService.setVideoPath(pickedFile.path);
       _videoDataService.setVideoPlayerOpened(true);
       this._videoLoaded = true;
       notifyListeners();

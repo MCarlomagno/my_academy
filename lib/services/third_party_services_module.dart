@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import 'api/sample_database.dart';
+
 @module
 abstract class ThirdPartyServicesModule {
   @lazySingleton
@@ -22,4 +24,6 @@ abstract class ThirdPartyServicesModule {
   ModulesService get modulesService;
   @lazySingleton
   VideoDataService get videoDataService;
+  @lazySingleton
+  SampleDataBase get sampleDataBase;
 }
