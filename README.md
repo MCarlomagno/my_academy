@@ -1,6 +1,8 @@
 # my_academy
 
-A new Flutter project.
+Simple project for fun
+
+Flutter web deployed version: https://eloquent-lewin-270ba9.netlify.app/#/
 
 ## Getting Started
 
