@@ -3,6 +3,7 @@ import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/services/api/modules_service.dart';
 import 'package:my_academy/services/api/sample_service.dart';
 import 'package:injectable/injectable.dart';
+import 'package:my_academy/services/ui_services/search_view_service.dart';
 import 'package:my_academy/services/ui_services/teach_view_service.dart';
 import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -36,4 +37,6 @@ abstract class ThirdPartyServicesModule {
   VideoDataService get videoDataService;
   @lazySingleton
   TeachViewService get testViewService;
+  @lazySingleton 
+  SearchViewService get searchViewService;
 }
