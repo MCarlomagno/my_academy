@@ -1,31 +1,43 @@
-import 'package:my_academy/models/class_model.dart';
+import 'package:my_academy/app/locator.dart';
+import 'package:my_academy/app/router.gr.dart';
 import 'package:my_academy/models/module_model.dart';
+import 'package:my_academy/services/api/modules_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class CreateCourseDetailViewModel extends BaseViewModel {
-  Class clase1 = Class(title: 'Clase 1', description: 'Descripcion clase 1');
-  Class clase2 = Class(title: 'Clase 2', description: 'Descripcion clase 2');
-  Class clase3 = Class(title: 'Clase 3', description: 'Descripcion clase 3');
-  Module sampleModule = Module(
-      title: 'Un modulo increible asdasd asdasd asd',
-      description: 'Este es un modulo excelente que contiene una lista de clases para aprender!',
-      classes: []);
-  Module sampleModule2 = Module(
-      title: 'Otro modulo inolvidable',
-      description: 'Este es un modulo excelente que contiene una lista de clases para aprender!',
-      classes: []);
-  Module sampleModule3 = Module(
-      title: 'Otro modulo inolvidable',
-      description: 'Este es un modulo excelente que contiene una lista de clases para aprender!',
-      classes: []);
-  List<Module> modules = [];
+  /// Service Injection
+  NavigationService _navigationService = locator<NavigationService>();
+  ModulesService _modulesService = locator<ModulesService>();
 
-  onModelReady() {
-    sampleModule.classes = [clase1, clase2, clase3];
-    sampleModule2.classes = [clase1, clase2, clase3];
-    sampleModule3.classes = [clase1, clase2, clase3];
-    modules.add(sampleModule);
-    modules.add(sampleModule2);
-    modules.add(sampleModule3);
+  List<Module> _modules = [];
+  List<Module> get modules => this._modules;
+
+  int _courseId;
+
+  onModelReady(int courseId) async {
+    this._courseId = courseId;
+    setBusy(true);
+    this._modules = await _modulesService.getModulesByCourseId(courseId);
+    setBusy(false);
+  }
+
+  Future<void> onRefresh() async {
+    notifyListeners();
+    await Future.delayed(Duration(seconds: 3));
+    return;
+  }
+
+  createModule() async {
+    /// result: true -> means that the module was successfully created
+    /// resutl: false -> meeans that the user got back
+    CreateModuleViewArguments createModuleViewArguments = CreateModuleViewArguments(courseId: this._courseId);
+    bool result = await _navigationService.navigateTo(Routes.createModuleView, arguments: createModuleViewArguments);
+    setBusy(true);
+    if(result != null && result) {
+      print('espera a que cargue los modulos');
+      this._modules = await _modulesService.getModulesByCourseId(this._courseId);
+    }
+    setBusy(false);
   }
 }

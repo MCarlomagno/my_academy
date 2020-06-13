@@ -7,44 +7,53 @@ class CreateCourseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreateCourseViewModel>.nonReactive(
+    return ViewModelBuilder<CreateCourseViewModel>.reactive(
       builder: (context, model, child) {
         return Scaffold(
           appBar: AppBar(
             title: Text('Crear curso'),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.send),
+                icon: Icon(
+                  Icons.send,
+                  color: Theme.of(context).accentColor,
+                ),
                 onPressed: () => model.onConfirm(),
               )
             ],
           ),
           body: Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: Card(
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Ingresa un título',
+            child: !model.isBusy
+                ? Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            TextField(
+                              controller: model.titleController,
+                              decoration: InputDecoration(
+                                hintText: 'Ingresa un título',
+                              ),
+                            ),
+                            TextField(
+                              controller: model.descriptionController,
+                              minLines: 5,
+                              maxLines: 5,
+                              decoration: InputDecoration(
+                                hintText: 'Ingresa una descripcion',
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      TextField(
-                        minLines: 5,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          hintText: 'Ingresa una descripcion',
-                        ),
-                      ),
-                    ],
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
                   ),
-                ),
-              ),
-            ),
           ),
         );
       },

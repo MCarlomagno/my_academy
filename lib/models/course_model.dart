@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'module_model.dart';
+import 'package:my_academy/models/module_model.dart';
 
 class Course {
+  int id;
+  int ownerUserId;
   String title;
   String description;
   List<Module> modules;
-  Course({@required this.title, @required this.description, @required this.modules});
+  Course({this.id, @required this.title, @required this.description, @required this.ownerUserId});
 }

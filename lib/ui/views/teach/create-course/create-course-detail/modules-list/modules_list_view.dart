@@ -10,17 +10,18 @@ class ModulesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ModulesListViewModel>.nonReactive(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
         return ListView.builder(
-                  // Let the ListView know how many items it needs to build.
-                  itemCount: this.modules.length,
-                  // Provide a builder function. This is where the magic happens.
-                  // Convert each item into a widget based on the type of item it is.
-                  itemBuilder: (context, index) {
-                    final item = this.modules[index];
-                    return ModuleOnListView(module: item);
-                  },
-                );
+          // Let the ListView know how many items it needs to build.
+          itemCount: this.modules.length,
+          // Provide a builder function. This is where the magic happens.
+          // Convert each item into a widget based on the type of item it is.
+          itemBuilder: (context, index) {
+            final item = this.modules[index];
+            return ModuleOnListView(module: item);
+          },
+        );
       },
       viewModelBuilder: () => ModulesListViewModel(),
     );
