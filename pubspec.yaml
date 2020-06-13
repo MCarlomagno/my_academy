@@ -37,6 +37,7 @@ dependencies:
   video_player:
   image_picker:
   camera:
+  path_provider:
   
 
   #inversion of control

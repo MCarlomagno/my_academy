@@ -1,4 +1,4 @@
-import 'package:my_academy/api/courses_service.dart';
+import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:stacked/stacked.dart';

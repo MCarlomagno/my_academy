@@ -5,11 +5,12 @@
 // **************************************************************************
 
 import 'package:my_academy/services/third_party_services_module.dart';
-import 'package:my_academy/api/classes_service.dart';
-import 'package:my_academy/api/courses_service.dart';
+import 'package:my_academy/services/api/classes_service.dart';
+import 'package:my_academy/services/api/courses_service.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:my_academy/api/modules_service.dart';
-import 'package:my_academy/api/sample_service.dart';
+import 'package:my_academy/services/api/modules_service.dart';
+import 'package:my_academy/services/api/sample_service.dart';
+import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
@@ -26,6 +27,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => thirdPartyServicesModule.navigationService);
   g.registerLazySingleton<SampleService>(
       () => thirdPartyServicesModule.quandlService);
+  g.registerLazySingleton<VideoDataService>(
+      () => thirdPartyServicesModule.videoDataService);
 }
 
 class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
@@ -41,4 +44,6 @@ class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
   NavigationService get navigationService => NavigationService();
   @override
   SampleService get quandlService => SampleService();
+  @override
+  VideoDataService get videoDataService => VideoDataService();
 }

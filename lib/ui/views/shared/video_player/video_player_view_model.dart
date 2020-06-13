@@ -1,10 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:my_academy/app/locator.dart';
+import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerViewModel extends BaseViewModel {
+
+  /// service injection
+  VideoDataService _videoDataService = locator<VideoDataService>();
+
   // Video player controller
   VideoPlayerController _controller;
   VideoPlayerController get controller => this._controller;
@@ -139,5 +145,9 @@ class VideoPlayerViewModel extends BaseViewModel {
     this._streamSubscriptionToProgress.cancel();
     this._controller.dispose();
     super.dispose();
+  }
+
+  onCloseButtonPressed() {
+    _videoDataService.setVideoPlayerOpened(false);
   }
 }

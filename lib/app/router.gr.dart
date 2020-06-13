@@ -11,20 +11,20 @@ import 'package:my_academy/ui/views/home/home_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create_course_detail_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/class-edit/class_edit_view.dart';
-import 'package:my_academy/ui/views/shared/video_camera.dart';
+import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
 
 abstract class Routes {
   static const homeViewRoute = '/home-view-route';
   static const createCourseView = '/create-course-view';
   static const createCourseDetailView = '/create-course-detail-view';
   static const classEditView = '/class-edit-view';
-  static const cameraApp = '/camera-app';
+  static const videoCameraView = '/video-camera-view';
   static const all = {
     homeViewRoute,
     createCourseView,
     createCourseDetailView,
     classEditView,
-    cameraApp,
+    videoCameraView,
   };
 }
 
@@ -79,9 +79,14 @@ class Router extends RouterBase {
           builder: (context) => ClassEditView(key: typedArgs.key),
           settings: settings,
         );
-      case Routes.cameraApp:
+      case Routes.videoCameraView:
+        if (hasInvalidArgs<VideoCameraViewArguments>(args)) {
+          return misTypedArgsRoute<VideoCameraViewArguments>(args);
+        }
+        final typedArgs =
+            args as VideoCameraViewArguments ?? VideoCameraViewArguments();
         return MaterialPageRoute<dynamic>(
-          builder: (context) => CameraApp(),
+          builder: (context) => VideoCameraView(key: typedArgs.key),
           settings: settings,
         );
       default:
@@ -116,4 +121,10 @@ class CreateCourseDetailViewArguments {
 class ClassEditViewArguments {
   final Key key;
   ClassEditViewArguments({this.key});
+}
+
+//VideoCameraView arguments holder class
+class VideoCameraViewArguments {
+  final Key key;
+  VideoCameraViewArguments({this.key});
 }
