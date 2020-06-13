@@ -9,6 +9,7 @@ import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart'
 
 @MaterialAutoRouter()
 class $Router {
+  @initial
   HomeView homeViewRoute;
   CreateCourseView createCourseView;
   CreateCourseDetailView createCourseDetailView;

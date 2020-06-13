@@ -24,7 +24,16 @@ class CreateCourseViewModel extends BaseViewModel {
     var newCourse = Course(title: _titleController.text, description: _descriptionController.text,ownerUserId: _sampleDataBase.currentUserId);  
     newCourse = await _coursesService.createCourse(newCourse);
     CreateCourseDetailViewArguments createCourseDetailViewArguments = CreateCourseDetailViewArguments(courseId: newCourse.id);
-    await _navigationService.navigateTo(Routes.createCourseDetailView, arguments: createCourseDetailViewArguments);
-    setBusy(false);
+    await _navigationService.replaceWith(Routes.createCourseDetailView, arguments: createCourseDetailViewArguments);
+  }
+
+  onCancel() {
+    _navigationService.back(result: false);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 }

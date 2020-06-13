@@ -14,6 +14,10 @@ class CreateCourseDetailView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text('Módulos de tu curso'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => model.onBackButtonPressed(),
+            ),
           ),
           body: model.isBusy
               ? Center(child: CircularProgressIndicator())

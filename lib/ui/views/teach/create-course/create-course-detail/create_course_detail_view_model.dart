@@ -2,6 +2,7 @@ import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
 import 'package:my_academy/models/module_model.dart';
 import 'package:my_academy/services/api/modules_service.dart';
+import 'package:my_academy/services/ui_services/teach_view_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -9,6 +10,7 @@ class CreateCourseDetailViewModel extends BaseViewModel {
   /// Service Injection
   NavigationService _navigationService = locator<NavigationService>();
   ModulesService _modulesService = locator<ModulesService>();
+  TeachViewService _teachViewService = locator<TeachViewService>();
 
   List<Module> _modules = [];
   List<Module> get modules => this._modules;
@@ -26,6 +28,11 @@ class CreateCourseDetailViewModel extends BaseViewModel {
     notifyListeners();
     await Future.delayed(Duration(seconds: 3));
     return;
+  }
+
+  onBackButtonPressed() {
+    _teachViewService.loadList();
+    _navigationService.popUntil((route) => route.settings.name == Routes.homeViewRoute);
   }
 
   createModule() async {

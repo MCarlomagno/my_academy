@@ -1,26 +1,37 @@
-import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
 import 'package:my_academy/models/course_model.dart';
+import 'package:my_academy/services/ui_services/teach_view_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class TeachViewModel extends BaseViewModel {
-
-  List<Course> _createdCourses;
-  List<Course> get createdCourses => this._createdCourses;
+class TeachViewModel extends ReactiveViewModel {
 
   //service injection
   final NavigationService _navigationService = locator<NavigationService>();
-  final CoursesService _coursesService = locator<CoursesService>();
+  final TeachViewService _teachViewService = locator<TeachViewService>();
+
+  @override
+  bool get isBusy => this._teachViewService.loading;
+
+  List<Course> get createdCourses => this._teachViewService.createdCourses;
 
   onModelReady() async {
-    setBusy(true);
-    this._createdCourses = await _coursesService.getUserCreatedCourses();
-    setBusy(false);
+    _teachViewService.loadList();
   }
 
   onCreate() async {
-     await _navigationService.navigateTo(Routes.createCourseView);
+    await _navigationService.navigateTo(Routes.createCourseView);
   }
+
+  popUpButtonPressed(value) {
+    if(value == 1) {
+      _teachViewService.loadList();
+    }
+  }
+
+  /// To make the service reactive (listen variable changes)
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_teachViewService];
+
 }

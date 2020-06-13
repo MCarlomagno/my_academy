@@ -12,6 +12,10 @@ class CreateCourseView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text('Crear curso'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => model.onCancel(),
+            ),
             actions: <Widget>[
               IconButton(
                 icon: Icon(
@@ -57,6 +61,7 @@ class CreateCourseView extends StatelessWidget {
           ),
         );
       },
+      disposeViewModel: true,
       viewModelBuilder: () => CreateCourseViewModel(),
     );
   }

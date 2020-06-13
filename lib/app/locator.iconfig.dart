@@ -11,6 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:my_academy/services/api/modules_service.dart';
 import 'package:my_academy/services/api/sample_database.dart';
 import 'package:my_academy/services/api/sample_service.dart';
+import 'package:my_academy/services/ui_services/teach_view_service.dart';
 import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:get_it/get_it.dart';
 
@@ -30,6 +31,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => thirdPartyServicesModule.sampleDataBase);
   g.registerLazySingleton<SampleService>(
       () => thirdPartyServicesModule.quandlService);
+  g.registerLazySingleton<TeachViewService>(
+      () => thirdPartyServicesModule.testViewService);
   g.registerLazySingleton<VideoDataService>(
       () => thirdPartyServicesModule.videoDataService);
 }
@@ -49,6 +52,8 @@ class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
   SampleDataBase get sampleDataBase => SampleDataBase();
   @override
   SampleService get quandlService => SampleService();
+  @override
+  TeachViewService get testViewService => TeachViewService();
   @override
   VideoDataService get videoDataService => VideoDataService();
 }
