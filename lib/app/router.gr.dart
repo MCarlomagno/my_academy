@@ -17,7 +17,7 @@ import 'package:my_academy/ui/views/teach/create-course/create-course-detail/mod
 import 'package:my_academy/models/module_model.dart';
 
 abstract class Routes {
-  static const homeViewRoute = '/home-view-route';
+  static const homeViewRoute = '/';
   static const createCourseView = '/create-course-view';
   static const createCourseDetailView = '/create-course-detail-view';
   static const classEditView = '/class-edit-view';

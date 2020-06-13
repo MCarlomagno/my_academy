@@ -21,11 +21,20 @@ class TeachView extends StatelessWidget {
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 1,
-                    child: Text(
-                      "Configuracion",
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.loop),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Recargar",
+                        ),
+                      ],
                     ),
                   ),
                 ],
+                onSelected: (value) => model.popUpButtonPressed(value),
               ),
             ],
           ),
