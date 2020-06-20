@@ -2,7 +2,7 @@ import 'package:my_academy/env/enviroment.dart';
 import 'package:http/http.dart' as http;
 
 class SampleService {
-  String url = Enviroment.apiUrl + Enviroment.apiKey; 
+  String url = Enviroment.apiUrl; 
 
 
  Future<String> sampleHttpRequest() async {

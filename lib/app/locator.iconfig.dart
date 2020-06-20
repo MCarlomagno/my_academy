@@ -13,6 +13,7 @@ import 'package:my_academy/services/api/sample_database.dart';
 import 'package:my_academy/services/api/sample_service.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
 import 'package:my_academy/services/ui_services/teach_view_service.dart';
+import 'package:my_academy/services/api/users_service.dart';
 import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:get_it/get_it.dart';
 
@@ -36,6 +37,8 @@ void $initGetIt(GetIt g, {String environment}) {
       () => thirdPartyServicesModule.searchViewService);
   g.registerLazySingleton<TeachViewService>(
       () => thirdPartyServicesModule.testViewService);
+  g.registerLazySingleton<UsersService>(
+      () => thirdPartyServicesModule.usersService);
   g.registerLazySingleton<VideoDataService>(
       () => thirdPartyServicesModule.videoDataService);
 }
@@ -59,6 +62,8 @@ class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
   SearchViewService get searchViewService => SearchViewService();
   @override
   TeachViewService get testViewService => TeachViewService();
+  @override
+  UsersService get usersService => UsersService();
   @override
   VideoDataService get videoDataService => VideoDataService();
 }
