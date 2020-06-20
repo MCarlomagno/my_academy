@@ -1,10 +1,10 @@
+import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/class_model.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:my_academy/models/module_model.dart';
 import 'package:my_academy/models/user_model.dart';
 
 class SampleDataBase {
-
   int _currentUserId = 1;
   int get currentUserId => this._currentUserId;
 

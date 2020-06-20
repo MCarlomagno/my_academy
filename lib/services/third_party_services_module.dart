@@ -9,17 +9,14 @@ import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'api/sample_database.dart';
+import 'api/users_service.dart';
 
 @module
 abstract class ThirdPartyServicesModule {
-
-  /// [Third party] services
   @lazySingleton
   NavigationService get navigationService;
   @lazySingleton
   DialogService get dialogService;
-
-  /// [API] services
   @lazySingleton
   SampleService get quandlService;
   @lazySingleton
@@ -30,9 +27,8 @@ abstract class ThirdPartyServicesModule {
   ModulesService get modulesService;
   @lazySingleton
   SampleDataBase get sampleDataBase;
-
-
-  /// [UI] services
+  @lazySingleton
+  UsersService get usersService;
   @lazySingleton
   VideoDataService get videoDataService;
   @lazySingleton
