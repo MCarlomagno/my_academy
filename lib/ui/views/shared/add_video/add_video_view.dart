@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
+import 'package:kidd_video_player/kidd_video_player.dart';
 import 'package:my_academy/ui/views/shared/video_player/video_player_view.dart';
 import 'package:stacked/stacked.dart';
 import 'add_video_view_model.dart';
@@ -58,12 +58,12 @@ class AddVideoView extends StatelessWidget {
                   ],
                 ),
               ),
-              Visibility(
-                visible: model.videoLoaded && model.videoPlayerOpened,
-                child: VideoPlayerView(
-                  file: model.videoFile,
-                ),
-              ),
+              model.videoFile != null && model.videoLoaded && model.videoPlayerOpened
+                  ? KiddVideoPlayer(
+                      videoFile: model.videoFile,
+                      fromUrl: false,
+                    )
+                  : Container(),
             ],
           ),
         );
