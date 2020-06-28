@@ -23,8 +23,7 @@ class TeachViewModel extends ReactiveViewModel {
   }
 
   onCreate() async {
-    await _coursesService.pingServer();
-    //await _navigationService.navigateTo(Routes.createCourseView);
+    await _navigationService.navigateTo(Routes.createCourseView);
   }
 
   popUpButtonPressed(value) {

@@ -8,4 +8,13 @@ class Course {
   String description;
   List<Module> modules;
   Course({this.id, @required this.title, @required this.description, @required this.ownerUserId});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": this.id,
+      "ownerUserId": this.ownerUserId,
+      "title": this.title,
+      "description": this.description,
+    };
+  }
 }
