@@ -12,32 +12,34 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           body: IndexedStack(
+              key: key,
               index: model.currentIndex,
               children: model.children,
             ),
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             onTap: model.onTap, 
             currentIndex: model.currentIndex,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
-                title: Text('Search'),
+                title: Text('Buscar'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.school),
-                title: Text('School'),
+                title: Text('Escuela'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.extension),
-                title: Text('Teach'),
+                title: Text('Crear'),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.equalizer),
-                title: Text('Statistics'),
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(Icons.equalizer),
+              //   title: Text('Estadisticas'),
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                title: Text('Profile'),
+                title: Text('Perfil'),
               ),
             ],
           ),

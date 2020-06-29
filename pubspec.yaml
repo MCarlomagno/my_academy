@@ -33,8 +33,13 @@ dependencies:
   stacked_services: 0.3.2+1
   #http
   http: ^0.12.1
-  #charts
-  flutter_echarts:
+  #media
+  video_player:
+  image_picker:
+  camera:
+  path_provider:
+  kidd_video_player: ^0.0.1
+  
 
   #inversion of control
   get_it:
