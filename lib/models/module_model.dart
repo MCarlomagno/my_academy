@@ -17,4 +17,14 @@ class Module {
       "description": this.description,
     };
   }
+    
+    
+  factory Module.fromJson(Map<String, dynamic> json) {
+    return Module(
+      id: json['id'] as int,
+      courseId: json['courseId'] as int,
+      title: json['title'] as String,
+      description: json['description'] as String,
+    );
+  }
 }
