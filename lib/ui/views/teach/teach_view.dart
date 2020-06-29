@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/ui/views/teach/created-courses-list/created_courses_list_view.dart';
 import 'package:my_academy/ui/views/teach/teach_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,27 +9,41 @@ class TeachView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<TeachViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
         return Scaffold(
-          body: SafeArea(
-            child: Form(
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    controller: model.titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Titulo',
-                    ),
-                  ),
-                  TextFormField(
-                    controller: model.descriptionController,
-                    decoration: InputDecoration(
-                      labelText: 'Descripcion',
+          appBar: AppBar(
+            title: Text('Cursos creados'),
+            leading: Container(),
+            actions: <Widget>[
+              PopupMenuButton(
+                icon: Icon(Icons.settings),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 1,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.loop),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Recargar",
+                        ),
+                      ],
                     ),
                   ),
                 ],
+                onSelected: (value) => model.popUpButtonPressed(value),
               ),
-            ),
+            ],
+          ),
+          body: Container(
+            child: model.isBusy
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : CreatedCoursesListView(courses: model.createdCourses),
           ),
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,
