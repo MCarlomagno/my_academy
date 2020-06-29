@@ -17,4 +17,13 @@ class Course {
       "description": this.description,
     };
   }
+
+  factory Course.fromJson(Map<String, dynamic> json) {
+    return Course(
+      id: json['id'] as int,
+      ownerUserId: json['ownerUserId'] as int,
+      title: json['title'] as String,
+      description: json['description'] as String,
+    );
+  }
 }

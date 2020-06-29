@@ -25,6 +25,7 @@ class ModulesService {
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
       print('latencia:' + latency.toString());
       print(response.body);
+      return Module.fromJson(jsonDecode(response.body));
     } catch (e) {}
     return newModule;
   }

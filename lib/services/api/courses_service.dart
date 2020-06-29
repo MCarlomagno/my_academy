@@ -28,13 +28,11 @@ class CoursesService {
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
       print('latencia:' + latency.toString());
       print(response.body);
+      return Course.fromJson(jsonDecode(response.body));
     }catch (e) {
       print(e);
       throw Exception('Ocurrio un error creando el curso');
     }
-
-    // TODO change the respose to Course type
-    return newCourse;
   }
 
   Future<void> pingServer() async {

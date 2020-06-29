@@ -17,4 +17,14 @@ class Class {
       "videoUrl": this.videoUrl
     };
   }
+
+  factory Class.fromJson(Map<String, dynamic> json) {
+    return Class(
+      id: json['id'] as int,
+      moduleId: json['moduleId'] as int,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      videoUrl: json['videoUrl'] as String,
+    );
+  }
 }
