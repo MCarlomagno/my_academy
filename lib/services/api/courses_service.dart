@@ -16,8 +16,22 @@ class CoursesService {
   }
 
   Future<List<Course>> getUserCreatedCourses() async {
-    await Future.delayed(Duration(seconds: 3));
-    return _sampleDataBase.getUserCreatedCourses();
+    try {
+      List<Course> courses = [];
+      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _sampleDataBase.currentUserId.toString();
+      int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+      var response = await http.get(getUserCoursesUrl);
+      int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+      print('latencia:' + latency.toString());
+      var coursesJsonList = jsonDecode(response.body);
+      for(var courseJson in coursesJsonList) {
+        courses.add(Course.fromJson(courseJson));
+      }
+      return courses;
+    }catch (e) {
+      print(e);
+      throw Exception('Ocurrio un error buscando cursos');
+    }
   }
 
   Future<Course> createCourse(Course newCourse) async {

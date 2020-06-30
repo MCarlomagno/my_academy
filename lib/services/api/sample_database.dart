@@ -29,10 +29,6 @@ class SampleDataBase {
     return _courses;
   }
 
-   List<Course> getUserCreatedCourses() {
-     return this._courses.where((element) => element.ownerUserId == _currentUserId).toList();
-   }
-
   Course createCourse(Course newCourse) {
     this._lastCourseId++;
     newCourse.id = this._lastCourseId;
