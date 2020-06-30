@@ -3,18 +3,28 @@ import 'dart:convert';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/module_model.dart';
-import 'package:my_academy/services/api/sample_database.dart';
 import 'package:http/http.dart' as http;
 
 class ModulesService {
   String url = Enviroment.apiUrl + "/modules";
-  SampleDataBase _sampleDataBase = locator<SampleDataBase>();
 
   Future<List<Module>> getModulesByCourseId(int courseId) async {
-    print('antes del await');
-    await Future.delayed(Duration(seconds: 3));
-    print('despues del await');
-    return _sampleDataBase.getModulesByCourseId(courseId);
+    try {
+      List<Module> modules = [];
+      var getModulesByCourseIdUrl = this.url + '/getModulesByCourseId/' + courseId.toString();
+      int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+      var response = await http.get(getModulesByCourseIdUrl);
+      int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+      print('latencia:' + latency.toString());
+      var modulesJson = jsonDecode(response.body);
+      for(var moduleJson in modulesJson) {
+        modules.add(Module.fromJson(moduleJson));
+      }
+      return modules;
+    }catch (e) {
+      print(e);
+      throw Exception('Ocurrio un error buscando modulos');
+    }
   }
 
   Future<Module> createModule(Module newModule) async {
