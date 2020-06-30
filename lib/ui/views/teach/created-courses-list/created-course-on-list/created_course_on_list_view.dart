@@ -56,7 +56,7 @@ class CreatedCourseOnListView extends StatelessWidget {
                 ),
                 RaisedButton(
                   color: Theme.of(context).accentColor,
-                  onPressed: () => model.onViewCourse(),
+                  onPressed: () => model.onViewCourse(course.id),
                   child: Text('Ver'),
                 ),
               ],
