@@ -25,6 +25,7 @@ class Module {
       courseId: json['courseId'] as int,
       title: json['title'] as String,
       description: json['description'] as String,
+      classes: []
     );
   }
 }
