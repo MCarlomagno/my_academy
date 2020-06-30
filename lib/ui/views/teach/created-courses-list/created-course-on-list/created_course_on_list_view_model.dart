@@ -7,7 +7,8 @@ class CreatedCourseOnListViewModel extends BaseViewModel {
   //service injection
   final NavigationService _navigationService = locator<NavigationService>();
 
-  onViewCourse() async {
-    await _navigationService.navigateTo(Routes.createCourseDetailView);
+  onViewCourse(int courseId) async {
+    var args = CreateCourseDetailViewArguments(courseId: courseId);
+    await _navigationService.navigateTo(Routes.createCourseDetailView, arguments: args);
   }
 }

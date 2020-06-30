@@ -20,7 +20,7 @@ class CreateCourseDetailViewModel extends BaseViewModel {
   onModelReady(int courseId) async {
     this._courseId = courseId;
     setBusy(true);
-    this._modules = [Module(courseId: 1,description: "a",title: "a", id: 1, classes: [])];
+    this._modules = await _modulesService.getModulesByCourseId(courseId);
     setBusy(false);
   }
 
