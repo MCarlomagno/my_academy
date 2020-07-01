@@ -12,12 +12,12 @@ class SchoolViewModel extends BaseViewModel {
 
   onModelReady() async {
     setBusy(true);
-    this._myCourses = await _coursesService.getUserCreatedCourses();
+    this._myCourses = await _coursesService.getUserEnrolledCourses();
     setBusy(false);
   }
 
   Future<void> reload() async {
-    this._myCourses = await _coursesService.getUserCreatedCourses();
+    this._myCourses = await _coursesService.getUserEnrolledCourses();
     notifyListeners();
     return;
   }
