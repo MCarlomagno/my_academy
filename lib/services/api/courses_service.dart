@@ -24,11 +24,30 @@ class CoursesService {
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
       print('latencia:' + latency.toString());
       var coursesJsonList = jsonDecode(response.body);
-      for(var courseJson in coursesJsonList) {
+      for (var courseJson in coursesJsonList) {
         courses.add(Course.fromJson(courseJson));
       }
       return courses;
-    }catch (e) {
+    } catch (e) {
+      print(e);
+      throw Exception('Ocurrio un error buscando cursos');
+    }
+  }
+
+  Future<List<Course>> getUserEnrolledCourses() async {
+    try {
+      List<Course> courses = [];
+      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _sampleDataBase.currentUserId.toString();
+      int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+      var response = await http.get(getUserCoursesUrl);
+      int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+      print('latencia:' + latency.toString());
+      var coursesJsonList = jsonDecode(response.body);
+      for (var courseJson in coursesJsonList) {
+        courses.add(Course.fromJson(courseJson));
+      }
+      return courses;
+    } catch (e) {
       print(e);
       throw Exception('Ocurrio un error buscando cursos');
     }
@@ -38,19 +57,18 @@ class CoursesService {
     try {
       String body = jsonEncode(newCourse.toJson());
       int beforeRequest = DateTime.now().millisecondsSinceEpoch;
-      var response = await http.post(url,body: body);
+      var response = await http.post(url, body: body);
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
       print('latencia:' + latency.toString());
       print(response.body);
       return Course.fromJson(jsonDecode(response.body));
-    }catch (e) {
+    } catch (e) {
       print(e);
       throw Exception('Ocurrio un error creando el curso');
     }
   }
 
   Future<void> pingServer() async {
-  
     DateTime before = DateTime.now();
     DateTime after;
     var client = http.Client();
