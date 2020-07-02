@@ -1,7 +1,6 @@
 import 'package:my_academy/services/api/classes_service.dart';
 import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/services/api/modules_service.dart';
-import 'package:my_academy/services/api/sample_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
 import 'package:my_academy/services/ui_services/teach_view_service.dart';
@@ -17,8 +16,6 @@ abstract class ThirdPartyServicesModule {
   NavigationService get navigationService;
   @lazySingleton
   DialogService get dialogService;
-  @lazySingleton
-  SampleService get quandlService;
   @lazySingleton
   CoursesService get coursesService;
   @lazySingleton
