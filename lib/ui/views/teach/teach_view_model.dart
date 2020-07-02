@@ -32,6 +32,12 @@ class TeachViewModel extends ReactiveViewModel {
     }
   }
 
+  Future<void> reload() async {
+    await _teachViewService.reloadList();
+    notifyListeners();
+    return;
+  }
+
   /// To make the service reactive (listen variable changes)
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_teachViewService];
