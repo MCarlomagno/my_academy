@@ -19,11 +19,18 @@ class TeachViewService with ReactiveServiceMixin {
     listenToReactiveValues([_createdCourses,_loading]);
   }
 
-  loadList() async {
-    print('List reloaded!');
+  Future<void> loadList() async {
     this._loading.value = true;
     this._createdCourses.value = await _coursesService.getUserCreatedCourses();
     this._loading.value = false;
+    print('List loaded!');
+    return;
+  }
+
+  Future<void> reloadList() async {
+    this._createdCourses.value = await _coursesService.getUserCreatedCourses();
+    print('List reloaded!');
+    return;
   }
 
 }
