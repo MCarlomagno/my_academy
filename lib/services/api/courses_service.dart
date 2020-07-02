@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/course_model.dart';
