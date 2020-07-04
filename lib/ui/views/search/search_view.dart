@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
+import 'package:my_academy/ui/views/search/last-created-course/last_created_course_view.dart';
 import 'package:my_academy/ui/views/search/search_view_model.dart';
 import 'package:stacked/stacked.dart';
+
+import 'course-on-search-list/course_on_search_list_view.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var theme = Theme.of(context);
     return ViewModelBuilder<SearchViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
@@ -35,65 +40,69 @@ class SearchView extends StatelessWidget {
                 )
               : RefreshIndicator(
                   onRefresh: () => model.reload(),
-                  child: ListView.builder(
-                    itemCount: model.courses.length,
-                    itemBuilder: (context, index) {
-                      var item = model.courses[index];
-                      return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-                        child: Container(
-                          margin: EdgeInsets.all(15.0),
-                          height: 300,
-                          child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Text(item.title,
-                                        style: Theme.of(context).textTheme.headline5,
-                                        overflow: TextOverflow.fade,
-                                        softWrap: false),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: Text(item.description),
-                              ),
-                              Container(
-                                height: 150,
-                                padding: EdgeInsets.symmetric(vertical: 10),
-                                child: ListView.builder(
-                                  // This next line does the trick.
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: item.modules.length,
-                                  itemBuilder: (context, index) {
-                                    var currentClass = item.modules[index];
-                                    return Container(
-                                        width: 160.0,
-                                        child: Card(
-                                          child: Column(
-                                            children: <Widget>[
-                                              Text(currentClass.title),
-                                              Text(currentClass.description),
-                                            ],
-                                          ),
-                                        ));
-                                  },
-                                ),
-                              ),
-                              RaisedButton(
-                                color: Theme.of(context).accentColor,
-                                onPressed: () => null,
-                                child: Text('Ver'),
-                              ),
-                            ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Recomendados para vos",
+                          style: theme.textTheme.headline5,
+                          textAlign: TextAlign.center,
+                        ),
+                        Container(
+                          height: 250,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.recommendedCourses.length,
+                            itemBuilder: (context, index) {
+                              var item = model.recommendedCourses[index];
+                              return CourseOnSearchListView(
+                                course: item,
+                              );
+                            },
                           ),
                         ),
-                      );
-                    },
+                        Text(
+                          "Más populares",
+                          style: theme.textTheme.headline5,
+                          textAlign: TextAlign.center,
+                        ),
+                        Container(
+                          height: 250,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: model.popularCourses.length,
+                            itemBuilder: (context, index) {
+                              var item = model.popularCourses[index];
+                              return CourseOnSearchListView(
+                                course: item,
+                              );
+                            },
+                          ),
+                        ),
+                        Text(
+                          "Últimos credos",
+                          style: theme.textTheme.headline5,
+                          textAlign: TextAlign.center,
+                        ),
+                        Container(
+                          height: 140.0 * 5.0,
+                          width: size.width,
+                          child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: 5,
+                            itemBuilder: (context, index) {
+                              var item = model.lastCourses[index];
+                              return LastCreatedCourseView(
+                                course: item,
+                              );
+                            },
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
         );

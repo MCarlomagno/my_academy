@@ -11,28 +11,30 @@ class CreatedCourseOnListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Step> moduleSteps = [];
-
     return ViewModelBuilder<CreatedCourseOnListViewModel>.nonReactive(
       builder: (context, model, child) {
         final textTheme = Theme.of(context).textTheme;
         return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           elevation: 8.0,
-          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: InkWell(
             onTap: () => model.onViewCourse(course.id),
             child: Container(
-              height: 300,
+              height: 400,
               child: Stack(
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Container(
-                        height: 150,
+                        height: 200,
                         child: CachedNetworkImage(
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0)),
                               image: DecorationImage(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
@@ -56,7 +58,7 @@ class CreatedCourseOnListView extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        height: 150,
+                        height: 200,
                       ),
                     ],
                   ),
@@ -66,7 +68,7 @@ class CreatedCourseOnListView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          height: 150,
+                          height: 200,
                           child: Align(
                             alignment: Alignment.topRight,
                             child: PopupMenuButton(
