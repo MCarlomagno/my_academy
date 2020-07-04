@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:stacked/stacked.dart';
 
-import 'created_course_on_list_view_model.dart';
+import 'course_on_list_view_model.dart';
 
-class CreatedCourseOnListView extends StatelessWidget {
-  const CreatedCourseOnListView({Key key, @required this.course}) : super(key: key);
+class CourseOnListView extends StatelessWidget {
+  const CourseOnListView({Key key, @required this.course}) : super(key: key);
   final Course course;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreatedCourseOnListViewModel>.nonReactive(
+    return ViewModelBuilder<CourseOnListViewModel>.nonReactive(
       builder: (context, model, child) {
         final textTheme = Theme.of(context).textTheme;
         return Card(
@@ -103,7 +103,7 @@ class CreatedCourseOnListView extends StatelessWidget {
           ),
         );
       },
-      viewModelBuilder: () => CreatedCourseOnListViewModel(),
+      viewModelBuilder: () => CourseOnListViewModel(),
     );
   }
 }

@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:stacked/stacked.dart';
 
-import 'created_course_on_list_view_model.dart';
+import 'last_created_course_view_model.dart';
 
-class CreatedCourseOnListView extends StatelessWidget {
-  const CreatedCourseOnListView({Key key, @required this.course}) : super(key: key);
+class LastCreatedCourseView extends StatelessWidget {
+  const LastCreatedCourseView({Key key, @required this.course}) : super(key: key);
   final Course course;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<CreatedCourseOnListViewModel>.nonReactive(
+    var size = MediaQuery.of(context).size;
+    return ViewModelBuilder<LastCreatedCourseViewModel>.nonReactive(
       builder: (context, model, child) {
         final textTheme = Theme.of(context).textTheme;
         return Card(
@@ -19,22 +20,23 @@ class CreatedCourseOnListView extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
           ),
           elevation: 8.0,
-          margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           child: InkWell(
             onTap: () => model.onViewCourse(course.id),
             child: Container(
-              height: 400,
+              height: 100,
               child: Stack(
                 children: <Widget>[
-                  Column(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Container(
-                        height: 200,
+                        width: size.width / 3.0,
                         child: CachedNetworkImage(
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(15.0),topRight: Radius.circular(15.0)),
+                              borderRadius:
+                                  BorderRadius.only(topLeft: Radius.circular(15.0), bottomLeft: Radius.circular(15.0)),
                               image: DecorationImage(
                                 image: imageProvider,
                                 fit: BoxFit.cover,
@@ -57,42 +59,27 @@ class CreatedCourseOnListView extends StatelessWidget {
                           errorWidget: (context, url, error) => new Icon(Icons.error),
                         ),
                       ),
-                      Container(
-                        height: 200,
-                      ),
                     ],
                   ),
                   Container(
+                    padding: EdgeInsets.only(left: size.width / 3.0),
+                    width: size.width,
                     margin: EdgeInsets.all(10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Container(
-                          height: 200,
-                          child: Align(
-                            alignment: Alignment.topRight,
-                            child: PopupMenuButton(
-                              itemBuilder: (context) => <PopupMenuEntry<dynamic>>[
-                                const PopupMenuItem<dynamic>(
-                                  value: 1,
-                                  child: Text('Borrar'),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Flexible(
                               child: Text(this.course.title,
-                                  style: textTheme.headline5, overflow: TextOverflow.fade, softWrap: false),
+                                  style: textTheme.bodyText1, overflow: TextOverflow.fade, softWrap: false),
                             ),
                           ],
                         ),
-                        Text(
-                          this.course.description,
-                          style: TextStyle(color: Colors.grey),
+                        Flexible(
+                          child: Text(this.course.description,
+                              style: TextStyle(color: Colors.grey), overflow: TextOverflow.fade),
                         ),
                       ],
                     ),
@@ -103,7 +90,7 @@ class CreatedCourseOnListView extends StatelessWidget {
           ),
         );
       },
-      viewModelBuilder: () => CreatedCourseOnListViewModel(),
+      viewModelBuilder: () => LastCreatedCourseViewModel(),
     );
   }
 }
