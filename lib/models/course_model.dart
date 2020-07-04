@@ -7,7 +7,8 @@ class Course {
   String title;
   String description;
   List<Module> modules;
-  Course({this.id, @required this.title, @required this.description, @required this.ownerUserId, this.modules});
+  String thumbnailImage;
+  Course({this.id, @required this.title, @required this.description, @required this.ownerUserId, this.modules, @required this.thumbnailImage});
 
   Map<String, dynamic> toJson() {
     return {
@@ -15,6 +16,7 @@ class Course {
       "ownerUserId": this.ownerUserId,
       "title": this.title,
       "description": this.description,
+      "thumbnailImage": this.thumbnailImage
     };
   }
 
@@ -24,6 +26,7 @@ class Course {
       ownerUserId: json['ownerUserId'] as int,
       title: json['title'] as String,
       description: json['description'] as String,
+      thumbnailImage: json['thumbnailImage'] as String,
       modules: [],
     );
   }

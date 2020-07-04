@@ -3,29 +3,14 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/class_model.dart';
+import 'package:my_academy/samples/sample_images.dart';
+import 'package:my_academy/samples/sample_videos.dart';
 import 'package:my_academy/services/api/classes_service.dart';
 import 'package:my_academy/services/ui_services/video_data_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class ClassEditViewModel extends BaseViewModel {
-  // We will save sample mp4 videos untill we already implement a storage service to host the videos
-  var sampleVideos = [
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
-  ];
-
 
   //service injection
   NavigationService _navigationService = locator<NavigationService>();
@@ -53,15 +38,22 @@ class ClassEditViewModel extends BaseViewModel {
 
       // selecting random element from sample video list
       final _random = new Random();
-      var videoUrl = sampleVideos[_random.nextInt(sampleVideos.length)];
+      var videoUrl = SampleVideo.sampleVideos[_random.nextInt(SampleVideo.sampleVideos.length)];
+      var thumbnailImage = SampleImage.images[_random.nextInt(SampleImage.images.length)];
+
+      print('before');
+      print(thumbnailImage);
       
       Class currentClass = Class(
           moduleId: this._moduleId,
           title: _titleController.text,
           description: _descriptionCotroller.text,
-          videoUrl: videoUrl);
-      print('agregando clases a modulo');
-      await _classesService.createClass(currentClass);
+          videoUrl: videoUrl,
+          thumbnailImage: thumbnailImage);
+      Class createdClass = await _classesService.createClass(currentClass);
+
+      print('after');
+      print(createdClass.thumbnailImage);
       setBusy(false);
       _navigationService.back(result: true);
     }
