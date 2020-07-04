@@ -16,28 +16,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      darkTheme: ThemeData(
-        pageTransitionsTheme: PageTransitionsTheme(
-          builders: <TargetPlatform, PageTransitionsBuilder>{
-            TargetPlatform.iOS: _createTransition(),
-            TargetPlatform.android: _createTransition(),
-          },
-        ),
-        brightness: Brightness.dark ,
-        primaryColor: Color(0xFF212121),
-        accentColor: Color(0xFF00bfa5),
-        // Define the default TextTheme. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-            //   headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            ),
-      ),
+      // darkTheme: ThemeData(
+      //   pageTransitionsTheme: PageTransitionsTheme(
+      //     builders: <TargetPlatform, PageTransitionsBuilder>{
+      //       TargetPlatform.iOS: _createTransition(),
+      //       TargetPlatform.android: _createTransition(),
+      //     },
+      //   ),
+      //   brightness: Brightness.dark,
+      //   primaryColor: Color(0xFF142850),
+      //   accentColor: Color(0xFF00909e),
+      //   // Define the default TextTheme. Use this to specify the default
+      //   // text styling for headlines, titles, bodies of text, and more.
+      //   textTheme: TextTheme(
+      //       //   headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+      //       //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+      //       ),
+      // ),
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,
-        primaryColor: Color(0xFF212121),
-        accentColor: Color(0xFF00bfa5),
+        primaryColor: Color(0xFF142850),
+        accentColor: Color(0xFF00909e),
+        canvasColor: Color(0xFFdae1e7),
         // Define the default TextTheme. Use this to specify the default
         // text styling for headlines, titles, bodies of text, and more.
         textTheme: TextTheme(
