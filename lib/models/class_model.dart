@@ -6,7 +6,8 @@ class Class {
   String title;
   String description;
   String videoUrl;
-  Class({this.id, this.moduleId, @required this.title, @required this.description, @required this.videoUrl});
+  String thumbnailImage;
+  Class({this.id, this.moduleId, @required this.title, @required this.description, @required this.videoUrl, @required this.thumbnailImage});
 
   Map<String, dynamic> toJson() {
     return {
@@ -14,7 +15,8 @@ class Class {
       "moduleId": this.moduleId,
       "title": this.title,
       "description": this.description,
-      "videoUrl": this.videoUrl
+      "videoUrl": this.videoUrl,
+      "thumbnailImage": this.thumbnailImage
     };
   }
 
@@ -25,6 +27,7 @@ class Class {
       title: json['title'] as String,
       description: json['description'] as String,
       videoUrl: json['videoUrl'] as String,
+      thumbnailImage: json['thumbnailImage'] as String
     );
   }
 }
