@@ -39,6 +39,8 @@ dependencies:
   camera:
   path_provider:
   kidd_video_player: ^0.0.1
+  #content
+  cached_network_image: ^2.2.0+1
   
 
   #inversion of control
