@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             TargetPlatform.android: _createTransition(),
           },
         ),
-        brightness: Brightness.dark,
+        brightness: Brightness.dark ,
         primaryColor: Color(0xFF212121),
         accentColor: Color(0xFF00bfa5),
         // Define the default TextTheme. Use this to specify the default

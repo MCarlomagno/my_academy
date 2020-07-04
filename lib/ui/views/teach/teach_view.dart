@@ -16,29 +16,6 @@ class TeachView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text('Cursos creados'),
-            leading: Container(),
-            actions: <Widget>[
-              PopupMenuButton(
-                icon: Icon(Icons.settings),
-                itemBuilder: (context) => [
-                  PopupMenuItem(
-                    value: 1,
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.loop),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Recargar",
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-                onSelected: (value) => model.popUpButtonPressed(value),
-              ),
-            ],
           ),
           body: RefreshIndicator(
               onRefresh: () => model.reload(),
@@ -59,7 +36,7 @@ class TeachView extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,
             onPressed: model.onCreate,
-            label: Text("Crear curso"),
+            label: Text("Crear"),
             icon: Icon(Icons.add),
           ),
         );
