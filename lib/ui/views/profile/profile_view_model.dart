@@ -1,13 +1,23 @@
+import 'package:my_academy/app/locator.dart';
+import 'package:my_academy/models/user_model.dart';
+import 'package:my_academy/services/api/users_service.dart';
 import 'package:stacked/stacked.dart';
 
 class ProfileViewModel extends BaseViewModel {
-  String _photoUrl = 'https://i.imgur.com/BoN9kdC.png';
-  String get photoUrl => this._photoUrl;
+  UsersService _usersService = locator<UsersService>();
 
-  String _name = 'Marcos Carlomagno';
-  String get name => this._name;
+  String get photoUrl => this._user.imageUrl;
 
-  String _email = 'marcoscarlomagno1@gmail.com';
-  String get email => this._email;
+  String get name => this._user.name + ' ' + this._user.surname;
+
+  String get email => this._user.email;
+
+  User _user; 
+
+  onModelReady() async {
+    setBusy(true);
+    this._user = await _usersService.getUserById(_usersService.currentUserId);
+    setBusy(false);
+  }
 
 }

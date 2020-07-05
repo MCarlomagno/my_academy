@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/course_model.dart';
-import 'package:my_academy/services/api/sample_database.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_academy/services/api/users_service.dart';
 
 class CoursesService {
   String url = Enviroment.apiUrl + "/courses";
-  SampleDataBase _sampleDataBase = locator<SampleDataBase>();
+  UsersService _usersService = locator<UsersService>();
 
   Future<List<Course>> getAllCourses() async {
     try {
@@ -31,7 +31,7 @@ class CoursesService {
   Future<List<Course>> getUserCreatedCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _sampleDataBase.currentUserId.toString();
+      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _usersService.currentUserId.toString();
       int beforeRequest = DateTime.now().millisecondsSinceEpoch;
       var response = await http.get(getUserCoursesUrl);
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
@@ -50,7 +50,7 @@ class CoursesService {
   Future<List<Course>> getUserEnrolledCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _sampleDataBase.currentUserId.toString();
+      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _usersService.currentUserId.toString();
       int beforeRequest = DateTime.now().millisecondsSinceEpoch;
       var response = await http.get(getUserCoursesUrl);
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;

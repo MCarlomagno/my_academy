@@ -10,7 +10,6 @@ import 'package:my_academy/services/api/courses_service.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:my_academy/services/api/enrollments_service.dart';
 import 'package:my_academy/services/api/modules_service.dart';
-import 'package:my_academy/services/api/sample_database.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
 import 'package:my_academy/services/ui_services/teach_view_service.dart';
 import 'package:my_academy/services/api/users_service.dart';
@@ -31,8 +30,6 @@ void $initGetIt(GetIt g, {String environment}) {
       () => thirdPartyServicesModule.modulesService);
   g.registerLazySingleton<NavigationService>(
       () => thirdPartyServicesModule.navigationService);
-  g.registerLazySingleton<SampleDataBase>(
-      () => thirdPartyServicesModule.sampleDataBase);
   g.registerLazySingleton<SearchViewService>(
       () => thirdPartyServicesModule.searchViewService);
   g.registerLazySingleton<TeachViewService>(
@@ -56,8 +53,6 @@ class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
   ModulesService get modulesService => ModulesService();
   @override
   NavigationService get navigationService => NavigationService();
-  @override
-  SampleDataBase get sampleDataBase => SampleDataBase();
   @override
   SearchViewService get searchViewService => SearchViewService();
   @override

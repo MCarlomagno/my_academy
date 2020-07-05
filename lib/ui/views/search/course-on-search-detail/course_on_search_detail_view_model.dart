@@ -5,14 +5,14 @@ import 'package:my_academy/models/module_model.dart';
 import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/services/api/enrollments_service.dart';
 import 'package:my_academy/services/api/modules_service.dart';
-import 'package:my_academy/services/api/sample_database.dart';
+import 'package:my_academy/services/api/users_service.dart';
 import 'package:stacked/stacked.dart';
 
 class CourseOnSearchDetailViewModel extends BaseViewModel {
   ModulesService _modulesService = locator<ModulesService>();
   EnrollmentsService _enrollmentsService = locator<EnrollmentsService>();
   CoursesService _coursesService = locator<CoursesService>();
-  SampleDataBase _sampleDataBase = locator<SampleDataBase>();
+  UsersService _usersService = locator<UsersService>();
 
   List<Module> _modules = [];
   List<Module> get modules => this._modules;
@@ -41,7 +41,7 @@ class CourseOnSearchDetailViewModel extends BaseViewModel {
     this._enrollingCourse = true;
     notifyListeners();
 
-    Enrollment _enrollment = Enrollment(courseId: courseId, userId: _sampleDataBase.currentUserId);
+    Enrollment _enrollment = Enrollment(courseId: courseId, userId: _usersService.currentUserId);
     await _enrollmentsService.createEnrollment(_enrollment);
 
     this._enrolledToCourse = true;
