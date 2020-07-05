@@ -1,5 +1,6 @@
 import 'package:my_academy/services/api/classes_service.dart';
 import 'package:my_academy/services/api/courses_service.dart';
+import 'package:my_academy/services/api/enrollments_service.dart';
 import 'package:my_academy/services/api/modules_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
@@ -32,4 +33,6 @@ abstract class ThirdPartyServicesModule {
   TeachViewService get testViewService;
   @lazySingleton 
   SearchViewService get searchViewService;
+  @lazySingleton 
+  EnrollmentsService get enrollmentsService;
 }

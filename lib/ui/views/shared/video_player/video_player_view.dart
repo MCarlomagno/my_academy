@@ -14,7 +14,6 @@ class VideoPlayerView extends StatelessWidget {
     return ViewModelBuilder<VideoPlayerViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(this.file),
       builder: (context, model, child) {
-        // TODO ver si se puede pasar al onModelReady()
         model.startStreaming();
 
         return Container(

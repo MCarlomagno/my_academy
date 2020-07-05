@@ -49,9 +49,9 @@ class VideoPlayerViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  /**
-   *  TODO implement documentation
-   */
+  ///
+  /// TODO implement documentation
+  ///
   String printDuration(Duration duration) {
     if (duration != null) {
       String twoDigits(int n) {
@@ -67,9 +67,9 @@ class VideoPlayerViewModel extends BaseViewModel {
     }
   }
 
-  /**
-   *  TODO implement documentation
-   */
+  ///
+  ///  TODO implement documentation
+  /// 
   startStreaming() {
     if (!isBusy) {
       _streamToProgress = this._controller.position.asStream();
@@ -93,7 +93,6 @@ class VideoPlayerViewModel extends BaseViewModel {
       });
     } else {
       this._showControls = true;
-      // TODO ver si es necesario el notifyListeners()
       notifyListeners();
       this._timer = Timer(const Duration(seconds: 3), () {
         this._showControls = false;

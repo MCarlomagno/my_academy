@@ -15,6 +15,8 @@ import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create-module/create_module_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/module-detail/module_detail_view.dart';
 import 'package:my_academy/models/module_model.dart';
+import 'package:my_academy/ui/views/search/course-on-search-detail/course_on_search_detail_view.dart';
+import 'package:my_academy/models/course_model.dart';
 
 abstract class Routes {
   static const homeViewRoute = '/';
@@ -24,6 +26,7 @@ abstract class Routes {
   static const videoCameraView = '/video-camera-view';
   static const createModuleView = '/create-module-view';
   static const moduleDetailView = '/module-detail-view';
+  static const courseOnSearchDetailView = '/course-on-search-detail-view';
   static const all = {
     homeViewRoute,
     createCourseView,
@@ -32,6 +35,7 @@ abstract class Routes {
     videoCameraView,
     createModuleView,
     moduleDetailView,
+    courseOnSearchDetailView,
   };
 }
 
@@ -117,6 +121,17 @@ class Router extends RouterBase {
               ModuleDetailView(key: typedArgs.key, module: typedArgs.module),
           settings: settings,
         );
+      case Routes.courseOnSearchDetailView:
+        if (hasInvalidArgs<CourseOnSearchDetailViewArguments>(args,
+            isRequired: true)) {
+          return misTypedArgsRoute<CourseOnSearchDetailViewArguments>(args);
+        }
+        final typedArgs = args as CourseOnSearchDetailViewArguments;
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => CourseOnSearchDetailView(
+              key: typedArgs.key, course: typedArgs.course),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -171,4 +186,11 @@ class ModuleDetailViewArguments {
   final Key key;
   final Module module;
   ModuleDetailViewArguments({this.key, @required this.module});
+}
+
+//CourseOnSearchDetailView arguments holder class
+class CourseOnSearchDetailViewArguments {
+  final Key key;
+  final Course course;
+  CourseOnSearchDetailViewArguments({this.key, @required this.course});
 }

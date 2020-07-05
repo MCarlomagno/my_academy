@@ -18,7 +18,7 @@ class HomeViewModel extends BaseViewModel {
   final List<Widget> _children = [SearchView(),SchoolView(), TeachView(), ProfileView()];
   List<Widget> get children => _children;
 
-  int _currentIndex = 2;
+  int _currentIndex = 0;
   int get currentIndex => this._currentIndex;
 
 
