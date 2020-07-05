@@ -12,6 +12,8 @@ class ProfileViewModel extends BaseViewModel {
 
   String get email => this._user.email;
 
+  bool get isLoggedIn => _usersService.isLoggedIn;
+
   User _user; 
 
   onModelReady() async {

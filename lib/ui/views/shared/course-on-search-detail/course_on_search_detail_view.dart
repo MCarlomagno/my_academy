@@ -106,7 +106,7 @@ class CourseOnDetailView extends StatelessWidget {
                     ),
                   ],
                 ),
-                !model.enrolledToCourse
+                !model.enrolledToCourse && model.isLoggedIn
                     ? Positioned(
                         bottom: 0,
                         width: size.width,

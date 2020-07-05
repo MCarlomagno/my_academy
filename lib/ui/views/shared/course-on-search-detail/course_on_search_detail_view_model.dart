@@ -23,6 +23,8 @@ class CourseOnDetailViewModel extends BaseViewModel {
   bool _enrolledToCourse = true;
   bool get enrolledToCourse => this._enrolledToCourse;
 
+  bool get isLoggedIn => _usersService.isLoggedIn;
+
   onModelReady(int courseId) async {
     setBusy(true);
     List<Course> courses = await _coursesService.getUserEnrolledCourses();
