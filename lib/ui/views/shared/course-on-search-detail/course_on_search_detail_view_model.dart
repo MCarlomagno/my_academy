@@ -8,7 +8,7 @@ import 'package:my_academy/services/api/modules_service.dart';
 import 'package:my_academy/services/api/users_service.dart';
 import 'package:stacked/stacked.dart';
 
-class CourseOnSearchDetailViewModel extends BaseViewModel {
+class CourseOnDetailViewModel extends BaseViewModel {
   ModulesService _modulesService = locator<ModulesService>();
   EnrollmentsService _enrollmentsService = locator<EnrollmentsService>();
   CoursesService _coursesService = locator<CoursesService>();

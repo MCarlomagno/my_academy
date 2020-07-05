@@ -72,6 +72,7 @@ class CreatedCourseOnListView extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.topRight,
                             child: PopupMenuButton(
+                              icon: Icon(Icons.more_vert, color: Colors.white,),
                               itemBuilder: (context) => <PopupMenuEntry<dynamic>>[
                                 const PopupMenuItem<dynamic>(
                                   value: 1,
