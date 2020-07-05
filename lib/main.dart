@@ -3,8 +3,6 @@ import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'config/transition.dart';
-
 void main() {
   setupLocator();
   runApp(MyApp());
@@ -53,6 +51,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-PageTransitionsBuilder _createTransition() {
-  return MyPageTransitionBuilder();
-}
+// PageTransitionsBuilder _createTransition() {
+//   return MyPageTransitionBuilder();
+// }

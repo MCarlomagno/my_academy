@@ -31,7 +31,6 @@ class VideoCameraViewModel extends BaseViewModel {
 
   /// Device cameras
   List<CameraDescription> _cameras;
-  CameraType _cameraType;
 
   // timer for time recorded
   Timer _timer;
@@ -50,7 +49,6 @@ class VideoCameraViewModel extends BaseViewModel {
   void startCamera() async {
     setBusy(true);
     this._cameras = await availableCameras();
-    this._cameraType = CameraType.Back;
     this._controller = CameraController(this._cameras.first, ResolutionPreset.veryHigh, enableAudio: true);
     await controller.initialize();
     setBusy(false);
@@ -85,7 +83,7 @@ class VideoCameraViewModel extends BaseViewModel {
     final String videoDirectory = '${appDirectory.path}/Videos';
     await Directory(videoDirectory).create(recursive: true);
     final String currentTime = DateTime.now().millisecondsSinceEpoch.toString();
-    final String filePath = '$videoDirectory/${currentTime}.mp4';
+    final String filePath = '$videoDirectory/$currentTime.mp4';
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {});
 
@@ -97,7 +95,7 @@ class VideoCameraViewModel extends BaseViewModel {
       startTimerRecording();
       videoPath = filePath;
     } on CameraException catch (e) {
-      print('ERROR INICIANDO EL VIDEO');
+      print('ERROR INICIANDO EL VIDEO: ' + e.toString());
       return null;
     }
 
@@ -120,14 +118,14 @@ class VideoCameraViewModel extends BaseViewModel {
       ]);
       _navigationService.back(result: true);
     } on CameraException catch (e) {
-      print('ERROR FINALIZANDO EL VIDEO');
+      print('ERROR FINALIZANDO EL VIDEO: ' + e.toString());
       return null;
     }
   }
 
-  /**
- *  TODO implement documentation
- */
+  ///
+  /// TODO implement documentation
+  /// 
   String printDuration() {
     Duration duration = Duration(seconds: _secondsRecorded);
     String twoDigits(int n) {

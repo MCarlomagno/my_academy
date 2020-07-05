@@ -35,10 +35,4 @@ class CreateCourseViewModel extends BaseViewModel {
   onCancel() {
     _navigationService.back(result: false);
   }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 }
