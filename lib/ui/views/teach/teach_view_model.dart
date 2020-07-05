@@ -44,4 +44,8 @@ class TeachViewModel extends ReactiveViewModel {
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_teachViewService];
 
+  navigateToSignUp() {
+    _navigationService.navigateTo(Routes.signUpView);
+  }
+
 }
