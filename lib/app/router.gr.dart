@@ -15,7 +15,7 @@ import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create-module/create_module_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/module-detail/module_detail_view.dart';
 import 'package:my_academy/models/module_model.dart';
-import 'package:my_academy/ui/views/search/course-on-search-detail/course_on_search_detail_view.dart';
+import 'package:my_academy/ui/views/shared/course-on-search-detail/course_on_search_detail_view.dart';
 import 'package:my_academy/models/course_model.dart';
 
 abstract class Routes {
@@ -122,14 +122,14 @@ class Router extends RouterBase {
           settings: settings,
         );
       case Routes.courseOnSearchDetailView:
-        if (hasInvalidArgs<CourseOnSearchDetailViewArguments>(args,
+        if (hasInvalidArgs<CourseOnDetailViewArguments>(args,
             isRequired: true)) {
-          return misTypedArgsRoute<CourseOnSearchDetailViewArguments>(args);
+          return misTypedArgsRoute<CourseOnDetailViewArguments>(args);
         }
-        final typedArgs = args as CourseOnSearchDetailViewArguments;
+        final typedArgs = args as CourseOnDetailViewArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (context) => CourseOnSearchDetailView(
-              key: typedArgs.key, course: typedArgs.course),
+          builder: (context) =>
+              CourseOnDetailView(key: typedArgs.key, course: typedArgs.course),
           settings: settings,
         );
       default:
@@ -188,9 +188,9 @@ class ModuleDetailViewArguments {
   ModuleDetailViewArguments({this.key, @required this.module});
 }
 
-//CourseOnSearchDetailView arguments holder class
-class CourseOnSearchDetailViewArguments {
+//CourseOnDetailView arguments holder class
+class CourseOnDetailViewArguments {
   final Key key;
   final Course course;
-  CourseOnSearchDetailViewArguments({this.key, @required this.course});
+  CourseOnDetailViewArguments({this.key, @required this.course});
 }

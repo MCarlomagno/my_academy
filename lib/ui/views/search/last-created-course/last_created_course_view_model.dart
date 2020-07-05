@@ -7,7 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 class LastCreatedCourseViewModel extends BaseViewModel {
   NavigationService _navigationService = locator<NavigationService>();
   onViewCourse(Course course) {
-    CourseOnSearchDetailViewArguments args = CourseOnSearchDetailViewArguments(course: course);
+    CourseOnDetailViewArguments args = CourseOnDetailViewArguments(course: course);
     _navigationService.navigateTo(Routes.courseOnSearchDetailView, arguments: args);
   }
 }
