@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_academy/ui/views/teach/created-courses-list/created_courses_list_view.dart';
 import 'package:my_academy/ui/views/teach/teach_view_model.dart';
 import 'package:stacked/stacked.dart';
 

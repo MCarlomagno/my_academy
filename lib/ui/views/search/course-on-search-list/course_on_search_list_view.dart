@@ -22,7 +22,7 @@ class CourseOnSearchListView extends StatelessWidget {
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           child: InkWell(
-            onTap: () => model.onViewCourse(course.id),
+            onTap: () => model.onViewCourse(course),
             child: Container(
               height: 100,
               width: size.width * 0.5,

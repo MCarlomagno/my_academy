@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kidd_video_player/kidd_video_player.dart';
-import 'package:my_academy/ui/views/shared/video_player/video_player_view.dart';
 import 'package:stacked/stacked.dart';
 import 'add_video_view_model.dart';
 

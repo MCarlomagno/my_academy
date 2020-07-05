@@ -1,10 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:my_academy/services/api/courses_service.dart';
 
-class SearchViewService {
+class SearchViewService implements DisposableBuildContext{
   CoursesService _coursesService = locator<CoursesService>();
 
   StreamController<List<Course>> _streamController = StreamController<List<Course>>();
@@ -22,5 +23,13 @@ class SearchViewService {
 
   loadCourses() async {
     this._allCourses = await _coursesService.getAllCourses();
+  }
+
+  @override
+  BuildContext get context => null;
+
+  @override
+  void dispose() {
+    _streamController.close();
   }
 }
