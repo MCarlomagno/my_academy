@@ -10,6 +10,8 @@ class UsersService {
   int _currentUserId = 1;
   int get currentUserId => this._currentUserId;
 
+  bool get isLoggedIn => true;
+
   Future<User> getUserById(int userId) async {
     try {
       var getUserByIdUrl = this.url + '/' + userId.toString();
