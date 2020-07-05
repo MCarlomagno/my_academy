@@ -95,7 +95,7 @@ class ProfileView extends StatelessWidget {
                 child: RaisedButton(
                   color: theme.primaryColor,
                   shape: StadiumBorder(),
-                  onPressed: () => null,
+                  onPressed: () => model.navigateToSignUp(),
                   child: Text(
                     "Registrarse",
                     style: TextStyle(color: Colors.white, fontSize: 20),

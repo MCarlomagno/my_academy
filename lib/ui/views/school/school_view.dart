@@ -56,7 +56,7 @@ class SchoolView extends StatelessWidget {
                 child: RaisedButton(
                   color: theme.primaryColor,
                   shape: StadiumBorder(),
-                  onPressed: () => null,
+                  onPressed: () => model.navigateToSignUp(),
                   child: Text(
                     "Aprender",
                     style: TextStyle(color: Colors.white, fontSize: 20),

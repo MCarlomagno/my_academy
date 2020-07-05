@@ -10,7 +10,7 @@ class UsersService {
   int _currentUserId = 1;
   int get currentUserId => this._currentUserId;
 
-  bool get isLoggedIn => true;
+  bool get isLoggedIn => false;
 
   Future<User> getUserById(int userId) async {
     try {
