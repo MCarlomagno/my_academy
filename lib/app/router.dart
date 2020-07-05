@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:my_academy/ui/views/auth/sign-up/sign_up_view.dart';
 import 'package:my_academy/ui/views/home/home_view.dart';
 import 'package:my_academy/ui/views/shared/course-on-search-detail/course_on_search_detail_view.dart';
 import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
@@ -19,4 +20,5 @@ class $Router {
   CreateModuleView createModuleView;
   ModuleDetailView moduleDetailView;
   CourseOnDetailView courseOnSearchDetailView;
+  SignUpView signUpView;
 }

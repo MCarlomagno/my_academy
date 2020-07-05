@@ -1,3 +1,4 @@
+import 'package:my_academy/app/router.gr.dart';
 import 'package:my_academy/services/api/courses_service.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/models/course_model.dart';
@@ -6,7 +7,7 @@ import 'package:stacked/stacked.dart';
 class SearchViewModel extends BaseViewModel {
 
   /// service injection
-  CoursesService _coursesService = locator<CoursesService>();
+  final CoursesService _coursesService = locator<CoursesService>();
 
   List<Course> _courses = [];
   List<Course> get courses => this._courses;  
@@ -40,6 +41,5 @@ class SearchViewModel extends BaseViewModel {
     notifyListeners();
     return;
   }
-
   
 }

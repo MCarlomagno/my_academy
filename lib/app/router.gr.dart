@@ -17,6 +17,7 @@ import 'package:my_academy/ui/views/teach/create-course/create-course-detail/mod
 import 'package:my_academy/models/module_model.dart';
 import 'package:my_academy/ui/views/shared/course-on-search-detail/course_on_search_detail_view.dart';
 import 'package:my_academy/models/course_model.dart';
+import 'package:my_academy/ui/views/auth/sign-up/sign_up_view.dart';
 
 abstract class Routes {
   static const homeViewRoute = '/';
@@ -27,6 +28,7 @@ abstract class Routes {
   static const createModuleView = '/create-module-view';
   static const moduleDetailView = '/module-detail-view';
   static const courseOnSearchDetailView = '/course-on-search-detail-view';
+  static const signUpView = '/sign-up-view';
   static const all = {
     homeViewRoute,
     createCourseView,
@@ -36,6 +38,7 @@ abstract class Routes {
     createModuleView,
     moduleDetailView,
     courseOnSearchDetailView,
+    signUpView,
   };
 }
 
@@ -132,6 +135,15 @@ class Router extends RouterBase {
               CourseOnDetailView(key: typedArgs.key, course: typedArgs.course),
           settings: settings,
         );
+      case Routes.signUpView:
+        if (hasInvalidArgs<SignUpViewArguments>(args)) {
+          return misTypedArgsRoute<SignUpViewArguments>(args);
+        }
+        final typedArgs = args as SignUpViewArguments ?? SignUpViewArguments();
+        return MaterialPageRoute<dynamic>(
+          builder: (context) => SignUpView(key: typedArgs.key),
+          settings: settings,
+        );
       default:
         return unknownRoutePage(settings.name);
     }
@@ -193,4 +205,10 @@ class CourseOnDetailViewArguments {
   final Key key;
   final Course course;
   CourseOnDetailViewArguments({this.key, @required this.course});
+}
+
+//SignUpView arguments holder class
+class SignUpViewArguments {
+  final Key key;
+  SignUpViewArguments({this.key});
 }

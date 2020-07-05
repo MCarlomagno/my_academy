@@ -121,7 +121,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     assert(context != null);
-    final ThemeData theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context).copyWith(primaryColor: Colors.white);
     assert(theme != null);
     return theme;
   }
@@ -130,7 +130,7 @@ class CustomSearchDelegate extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: Icon(Icons.clear, color: Colors.black,),
         onPressed: () {
           query = '';
         },
@@ -141,7 +141,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back, color: Colors.black,),
       onPressed: () {
         close(context, null);
       },
@@ -156,7 +156,7 @@ class CustomSearchDelegate extends SearchDelegate {
         children: <Widget>[
           Center(
             child: Text(
-              "Search term must be longer than two letters.",
+              "La busqueda debe tener al menos 3 letras.",
             ),
           )
         ],
@@ -189,7 +189,7 @@ class CustomSearchDelegate extends SearchDelegate {
               return Column(
                 children: <Widget>[
                   Text(
-                    "No Results Found.",
+                    "No se encontraron resultados.",
                   ),
                 ],
               );
