@@ -1,16 +1,21 @@
 import 'dart:convert';
-
+import 'package:flutter/services.dart';
 import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class UsersService {
   String url = Enviroment.apiUrl + "/users";
+  Map<String, String> headers = {'Content-Type': 'application/json'};
 
   int _currentUserId = 1;
   int get currentUserId => this._currentUserId;
 
-  bool get isLoggedIn => false;
+  bool _isLoggedIn = false;
+  bool get isLoggedIn => this._isLoggedIn;
+
+  User _user = null;
+  User get getCurrentUser => this._user;
 
   Future<User> getUserById(int userId) async {
     try {
@@ -25,6 +30,30 @@ class UsersService {
     } catch (e) {
       print(e);
       throw Exception('Ocurrio un error buscando cursos');
+    }
+  }
+
+  Future<User> login(String email, String password) async {
+    var loginUrl = this.url + '/login';
+    print(loginUrl);
+    int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+    var body = {"email": email, "password": password};
+    print(body);
+    var response = await http.post(loginUrl, body: jsonEncode(body), headers: headers);
+    int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+    print('latencia:' + latency.toString());
+    if (response.statusCode == 404) {
+      print('email not found');
+      throw PlatformException(code: response.statusCode.toString(), message: "Email inexistente");
+    } else if (response.statusCode == 403) {
+      print('Invalid password');
+      throw PlatformException(code: response.statusCode.toString(), message: "Contaseña inválida");
+    } else {
+      var userJson = jsonDecode(response.body);
+      User user = User.fromJson(userJson);
+      this._isLoggedIn = true;
+      this._user = user;
+      return user;
     }
   }
 }
