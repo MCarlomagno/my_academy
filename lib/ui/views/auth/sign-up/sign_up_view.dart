@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_academy/ui/views/auth/sign-up/sign_up_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -7,7 +8,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SignUpViewModel>.nonReactive(
+    return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) {
         return DefaultTabController(
           initialIndex: 1,
@@ -30,8 +31,8 @@ class SignUpView extends StatelessWidget {
             ),
             body: TabBarView(
               children: [
-                _signInView(context),
-                _signUpView(context),
+                _signInView(context, model),
+                _signUpView(context, model),
               ],
             ),
           ),
@@ -41,51 +42,91 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  Widget _signInView(BuildContext context) {
+  Widget _signInView(BuildContext context, SignUpViewModel model) {
     var theme = Theme.of(context);
+    final _formKey = GlobalKey<FormState>();
     return Container(
       margin: EdgeInsets.all(30),
-      child: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
-          ),
-          SizedBox(height: 30,),
-          TextField(
-            decoration: InputDecoration(labelText: "Contraseña", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
-          ),
-          Spacer(),
-          Container(
-            margin: EdgeInsets.only(top: 100),
-            width: 300,
-            height: 50,
-            child: RaisedButton(
-              shape: StadiumBorder(),
-              color: theme.primaryColor,
-              child: Text(
-                "Iniciar Sesión",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => null,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Email requerido';
+                }
+                return null;
+              },
+              controller: model.emailController,
+              decoration: InputDecoration(
+                  labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 30,
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Contraseña requerida';
+                }
+                return null;
+              },
+              obscureText: true,
+              controller: model.passwordController,
+              decoration: InputDecoration(
+                  labelText: "Contraseña",
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            Spacer(),
+            model.hasErrors ? Text(model.errorMessage): Container(),
+            Container(
+              margin: EdgeInsets.only(top: 100),
+              width: 300,
+              height: 50,
+              child: RaisedButton(
+                shape: StadiumBorder(),
+                color: theme.primaryColor,
+                child: model.signingIn
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2,),
+                      )
+                    : Text(
+                        "Iniciar Sesión",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                onPressed: !model.signingIn? () {
+                  if (_formKey.currentState.validate()) {
+                    model.signIn();
+                  }
+                }: null,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _signUpView(BuildContext context) {
+  Widget _signUpView(BuildContext context, SignUpViewModel model) {
     var theme = Theme.of(context);
     return Container(
       margin: EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
           TextField(
-            decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            decoration: InputDecoration(
+                labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           TextField(
-            decoration: InputDecoration(labelText: "Contraseña", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            decoration: InputDecoration(
+                labelText: "Contraseña",
+                border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
           ),
           Spacer(),
           Container(
