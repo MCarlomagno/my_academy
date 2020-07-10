@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:my_academy/ui/views/auth/sign-up/sign_up_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.reactive(
@@ -14,6 +12,7 @@ class SignUpView extends StatelessWidget {
           initialIndex: 1,
           length: 2,
           child: Scaffold(
+            resizeToAvoidBottomInset:false,
             appBar: AppBar(
               title: Text('Ingresar'),
               bottom: TabBar(
@@ -79,7 +78,7 @@ class SignUpView extends StatelessWidget {
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             Spacer(),
-            model.hasErrors ? Text(model.errorMessage): Container(),
+            model.hasErrors ? Text(model.errorMessage) : Container(),
             Container(
               margin: EdgeInsets.only(top: 100),
               width: 300,
@@ -87,21 +86,25 @@ class SignUpView extends StatelessWidget {
               child: RaisedButton(
                 shape: StadiumBorder(),
                 color: theme.primaryColor,
-                child: model.signingIn
+                child: model.loading
                     ? SizedBox(
                         width: 20,
                         height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2,),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
                       )
                     : Text(
                         "Iniciar Sesión",
                         style: TextStyle(color: Colors.white),
                       ),
-                onPressed: !model.signingIn? () {
-                  if (_formKey.currentState.validate()) {
-                    model.signIn();
-                  }
-                }: null,
+                onPressed: !model.loading
+                    ? () {
+                        if (_formKey.currentState.validate()) {
+                          model.signIn();
+                        }
+                      }
+                    : null,
               ),
             ),
           ],
@@ -112,38 +115,108 @@ class SignUpView extends StatelessWidget {
 
   Widget _signUpView(BuildContext context, SignUpViewModel model) {
     var theme = Theme.of(context);
+    final _formKey = GlobalKey<FormState>();
     return Container(
       margin: EdgeInsets.all(30),
-      child: Column(
-        children: <Widget>[
-          TextField(
-            decoration: InputDecoration(
-                labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          TextField(
-            decoration: InputDecoration(
-                labelText: "Contraseña",
-                border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
-          ),
-          Spacer(),
-          Container(
-            margin: EdgeInsets.only(top: 100),
-            width: 300,
-            height: 50,
-            child: RaisedButton(
-              shape: StadiumBorder(),
-              color: theme.primaryColor,
-              child: Text(
-                "Registrarme",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => null,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            // Email
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Email requerido';
+                }
+                return null;
+              },
+              controller: model.emailSignUpController,
+              decoration: InputDecoration(
+                  labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 30,
+            ),
+
+            // Password
+
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Contraseña requerida';
+                }
+                return null;
+              },
+              obscureText: true,
+              controller: model.passwordSignUpController,
+              decoration: InputDecoration(
+                  labelText: "Contraseña",
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+
+            //
+
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Nombe requerido';
+                }
+                return null;
+              },
+              controller: model.nameController,
+              decoration: InputDecoration(
+                  labelText: "Nombre", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Apellido requerido';
+                }
+                return null;
+              },
+              controller: model.surnameController,
+              decoration: InputDecoration(
+                  labelText: "Apellido",
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+            ),
+            Spacer(),
+            model.hasErrors ? Text(model.errorMessage) : Container(),
+            Container(
+              margin: EdgeInsets.only(top: 100),
+              width: 300,
+              height: 50,
+              child: RaisedButton(
+                shape: StadiumBorder(),
+                color: theme.primaryColor,
+                child: model.loading
+                    ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(
+                        "Registrarse",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                onPressed: !model.loading
+                    ? () {
+                        if (_formKey.currentState.validate()) {
+                          model.signUp();
+                        }
+                      }
+                    : null,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
