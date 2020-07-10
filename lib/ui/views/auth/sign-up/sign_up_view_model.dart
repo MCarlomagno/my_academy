@@ -12,14 +12,30 @@ class SignUpViewModel extends BaseViewModel {
   UsersService _usersService = locator<UsersService>();
   NavigationService _navigationService = locator<NavigationService>();
 
+  // Login controllers
+
   TextEditingController _emailController = TextEditingController();
   TextEditingController get emailController => this._emailController;
 
   TextEditingController _passwordController = TextEditingController();
   TextEditingController get passwordController => this._passwordController;
 
-  bool _signingIn = false;
-  bool get signingIn => this._signingIn;
+  // Sign Up controllers
+
+  TextEditingController _emailSignUpController = TextEditingController();
+  TextEditingController get emailSignUpController => this._emailSignUpController;
+
+  TextEditingController _passwordSignUpController = TextEditingController();
+  TextEditingController get passwordSignUpController => this._passwordSignUpController;
+
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController get nameController => this._nameController;
+
+  TextEditingController _surnameController = TextEditingController();
+  TextEditingController get surnameController => this._surnameController;
+
+  bool _loading = false;
+  bool get loading => this._loading;
 
   bool _hasErrors = false;
   bool get hasErrors => this._hasErrors;
@@ -28,7 +44,7 @@ class SignUpViewModel extends BaseViewModel {
   String get errorMessage => this._errorMessage;
 
   Future<void> signIn() async {
-    this._signingIn = true;
+    this._loading = true;
     this._hasErrors = false;
     notifyListeners();
     try {
@@ -43,7 +59,28 @@ class SignUpViewModel extends BaseViewModel {
       }
       this._hasErrors = true;
     } finally {
-      this._signingIn = false;
+      this._loading = false;
+      notifyListeners();
+    }
+  }
+
+    Future<void> signUp() async {
+    this._loading = true;
+    this._hasErrors = false;
+    notifyListeners();
+    try {
+      var user = User(email: emailSignUpController.text, name: nameController.text, surname: surnameController.text, password: passwordSignUpController.text);
+      User userResult = await _usersService.signUp(user);
+      _navigationService.navigateTo(Routes.homeViewRoute);
+    } catch (e) {
+      if(e is PlatformException) {
+        this._errorMessage = e.message;
+      } else {
+        this._errorMessage = 'Error inesperado';
+      }
+      this._hasErrors = true;
+    } finally {
+      this._loading = false;
       notifyListeners();
     }
   }
