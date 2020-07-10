@@ -6,8 +6,9 @@ class User {
   String surname;
   String email;
   String imageUrl;
+  String password;
 
-  User({@required this.id, @required this.name, @required this.surname, @required this.email, @required this.imageUrl});
+  User({this.id, @required this.name, @required this.surname, @required this.email,this.imageUrl, this.password});
 
   Map<String, dynamic> toJson() {
     return {
@@ -15,7 +16,8 @@ class User {
       "name": this.name,
       "surname": this.surname,
       "email": this.email,
-      "imageUrl": this.imageUrl
+      "imageUrl": this.imageUrl,
+      "password": this.password
     };
   }
 
