@@ -19,10 +19,8 @@ class ProfileViewModel extends BaseViewModel {
 
   User _user; 
 
-  onModelReady() async {
-    setBusy(true);
-    this._user = await _usersService.getUserById(_usersService.currentUserId);
-    setBusy(false);
+  onModelReady() {
+    this._user = _usersService.user;
   }
 
   

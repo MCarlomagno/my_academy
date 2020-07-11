@@ -26,7 +26,7 @@ class CreateCourseViewModel extends BaseViewModel {
     setBusy(true);
     final _random = Random();
     var thumbnailImage = SampleImage.images[_random.nextInt(SampleImage.images.length)];
-    var newCourse = Course(title: _titleController.text, description: _descriptionController.text,ownerUserId: _usersService.currentUserId, thumbnailImage: thumbnailImage);  
+    var newCourse = Course(title: _titleController.text, description: _descriptionController.text,ownerUserId: _usersService.user.id, thumbnailImage: thumbnailImage);  
     newCourse = await _coursesService.createCourse(newCourse);
     CreateCourseDetailViewArguments createCourseDetailViewArguments = CreateCourseDetailViewArguments(courseId: newCourse.id);
     await _navigationService.replaceWith(Routes.createCourseDetailView, arguments: createCourseDetailViewArguments);
