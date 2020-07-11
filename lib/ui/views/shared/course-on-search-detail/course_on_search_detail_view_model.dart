@@ -43,7 +43,7 @@ class CourseOnDetailViewModel extends BaseViewModel {
     this._enrollingCourse = true;
     notifyListeners();
 
-    Enrollment _enrollment = Enrollment(courseId: courseId, userId: _usersService.currentUserId);
+    Enrollment _enrollment = Enrollment(courseId: courseId, userId: _usersService.user.id);
     await _enrollmentsService.createEnrollment(_enrollment);
 
     this._enrolledToCourse = true;
