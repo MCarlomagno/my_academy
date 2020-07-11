@@ -41,6 +41,8 @@ dependencies:
   kidd_video_player: ^0.0.1
   #content
   cached_network_image: ^2.2.0+1
+  #storage
+  shared_preferences: ^0.5.8
   
 
   #inversion of control

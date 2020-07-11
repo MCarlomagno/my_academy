@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:my_academy/env/enviroment.dart';
 import 'package:my_academy/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UsersService {
   String url = Enviroment.apiUrl + "/users";
@@ -11,11 +12,53 @@ class UsersService {
   int _currentUserId = 1;
   int get currentUserId => this._currentUserId;
 
-  bool _isLoggedIn = false;
+  bool _isLoggedIn;
   bool get isLoggedIn => this._isLoggedIn;
 
   User _user;
-  User get getCurrentUser => this._user;
+  User get user => this._user;
+
+  setUser(User newUser) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    this._isLoggedIn = true;
+    this._user = newUser;
+
+    print("setUser:");
+    print('isLoggedIn: ' + this._isLoggedIn.toString());
+    print('id: ' + this._user.id.toString());
+    print('email: ' + this._user.email);
+    print('name: ' + this._user.name);
+    print('surname: ' + this._user.surname);
+    print('imageUrl: ' + this._user.imageUrl.toString());
+
+    await prefs.setBool('isLoggedIn', this._isLoggedIn);
+    await prefs.setInt('id', this._user.id);
+    await prefs.setString('email', this._user.email);
+    await prefs.setString('name', this._user.name);
+    await prefs.setString('surname', this._user.surname);
+    await prefs.setString('imageUrl', this._user.imageUrl ?? "");
+  }
+
+  Future<void> loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    this._isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (this._isLoggedIn) {
+      this._user = User(
+          id: prefs.getInt('id'),
+          email: prefs.getString('email'),
+          name: prefs.getString('name'),
+          surname: prefs.getString('surname'),
+          imageUrl: prefs.getString('imageUrl') ?? "");
+
+      print("getUser:");
+      print('isLoggedIn: ' + this._isLoggedIn.toString());
+      print('id: ' + this._user.id.toString());
+      print('email: ' + this._user.email);
+      print('name: ' + this._user.name);
+      print('surname: ' + this._user.surname);
+      print('imageUrl: ' + this._user.imageUrl);
+    }
+  }
 
   Future<User> getUserById(int userId) async {
     try {
@@ -49,7 +92,7 @@ class UsersService {
     } else {
       var userJson = jsonDecode(response.body);
       User user = User.fromJson(userJson);
-      this._isLoggedIn = true;
+      await this.setUser(user);
       this._user = user;
       return user;
     }
@@ -70,8 +113,7 @@ class UsersService {
     } else {
       var userJson = jsonDecode(response.body);
       User user = User.fromJson(userJson);
-      this._isLoggedIn = true;
-      this._user = user;
+      this.setUser(user);
       return user;
     }
   }
