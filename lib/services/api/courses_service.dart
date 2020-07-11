@@ -31,7 +31,7 @@ class CoursesService {
   Future<List<Course>> getUserCreatedCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _usersService.currentUserId.toString();
+      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _usersService.user.id.toString();
       int beforeRequest = DateTime.now().millisecondsSinceEpoch;
       var response = await http.get(getUserCoursesUrl);
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
@@ -50,7 +50,7 @@ class CoursesService {
   Future<List<Course>> getUserEnrolledCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _usersService.currentUserId.toString();
+      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _usersService.user.id.toString();
       int beforeRequest = DateTime.now().millisecondsSinceEpoch;
       var response = await http.get(getUserCoursesUrl);
       int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
