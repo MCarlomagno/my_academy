@@ -24,6 +24,7 @@ class AddVideoView extends StatelessWidget {
                         child: Icon(
                           Icons.file_upload,
                           size: 50,
+                          color: Colors.white,
                         ),
                         padding: EdgeInsets.all(20.0),
                       ),
@@ -43,6 +44,7 @@ class AddVideoView extends StatelessWidget {
                         child: Icon(
                           Icons.videocam,
                           size: 50,
+                          color: Colors.white,
                         ),
                         padding: EdgeInsets.all(20.0),
                       ),

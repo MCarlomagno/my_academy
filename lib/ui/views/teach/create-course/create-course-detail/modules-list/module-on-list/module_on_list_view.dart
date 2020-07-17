@@ -11,12 +11,16 @@ class ModuleOnListView extends StatelessWidget {
     return ViewModelBuilder<ModuleOnListViewModel>.nonReactive(
       builder: (context, model, child) {
         return Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           elevation: 8.0,
-          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Container(
-            margin: EdgeInsets.all(15.0),
+            margin: EdgeInsets.all(20.0),
             height: 300,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -31,28 +35,29 @@ class ModuleOnListView extends StatelessWidget {
                       child: PopupMenuButton(
                         itemBuilder: (context) => [
                           PopupMenuItem(
-                              value: 1,
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.redAccent,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "Borrar módulo",
-                                    style: TextStyle(color: Colors.redAccent),
-                                  ),
-                                ],
-                              )),
+                            value: 1,
+                            child: Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.delete,
+                                  color: Colors.redAccent,
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  "Borrar módulo",
+                                  style: TextStyle(color: Colors.redAccent),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     )
                   ],
                 ),
-                Padding(
+                Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(module.description),
                 ),
@@ -78,10 +83,16 @@ class ModuleOnListView extends StatelessWidget {
                     },
                   ),
                 ),
-                RaisedButton(
-                  color: Theme.of(context).accentColor,
-                  onPressed: () => model.openModuleDetail(key, module),
-                  child: Text('Ver'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    FloatingActionButton(
+                      heroTag: null,
+                      elevation: 0,
+                      onPressed: () => model.openModuleDetail(key, module),
+                      child: Icon(Icons.arrow_forward),
+                    ),
+                  ],
                 ),
               ],
             ),
