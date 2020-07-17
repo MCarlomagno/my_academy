@@ -36,7 +36,14 @@ class ClassEditView extends StatelessWidget {
                         child: TextField(
                           controller: model.titleController,
                           keyboardType: TextInputType.text,
-                          decoration: InputDecoration(labelText: "Nombre de la clase"),
+                          decoration: InputDecoration(
+                            labelText: "Título",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Container(
@@ -45,7 +52,14 @@ class ClassEditView extends StatelessWidget {
                           controller: model.descriptionController,
                           minLines: 4,
                           maxLines: 5,
-                          decoration: InputDecoration(labelText: "Descripción de la clase"),
+                          decoration: InputDecoration(
+                            labelText: "Descripción",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],
