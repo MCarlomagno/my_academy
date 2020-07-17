@@ -43,7 +43,8 @@ dependencies:
   cached_network_image: ^2.2.0+1
   #storage
   shared_preferences: ^0.5.8
-  
+  dio: ^3.0.9
+  crypto: ^2.0.6
 
   #inversion of control
   get_it:

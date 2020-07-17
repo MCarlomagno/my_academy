@@ -23,14 +23,6 @@ class UsersService {
     this._isLoggedIn = true;
     this._user = newUser;
 
-    print("setUser:");
-    print('isLoggedIn: ' + this._isLoggedIn.toString());
-    print('id: ' + this._user.id.toString());
-    print('email: ' + this._user.email);
-    print('name: ' + this._user.name);
-    print('surname: ' + this._user.surname);
-    print('imageUrl: ' + this._user.imageUrl.toString());
-
     await prefs.setBool('isLoggedIn', this._isLoggedIn);
     await prefs.setInt('id', this._user.id);
     await prefs.setString('email', this._user.email);
@@ -49,14 +41,6 @@ class UsersService {
           name: prefs.getString('name'),
           surname: prefs.getString('surname'),
           imageUrl: prefs.getString('imageUrl') ?? "");
-
-      print("getUser:");
-      print('isLoggedIn: ' + this._isLoggedIn.toString());
-      print('id: ' + this._user.id.toString());
-      print('email: ' + this._user.email);
-      print('name: ' + this._user.name);
-      print('surname: ' + this._user.surname);
-      print('imageUrl: ' + this._user.imageUrl);
     }
   }
 
