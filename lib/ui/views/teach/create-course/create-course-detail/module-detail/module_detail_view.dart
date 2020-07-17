@@ -14,48 +14,61 @@ class ModuleDetailView extends StatelessWidget {
         model.onModelReady(module);
       },
       builder: (context, model, child) {
+        var theme = Theme.of(context);
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Detalle de modulo'),
-          ),
-          body: Container(
-            child: Column(
+          body: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  expandedHeight: 200.0,
+                  floating: false,
+                  pinned: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(module.title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                        )),
+                  ),
+                ),
+              ];
+            },
+            body: Stack(
               children: <Widget>[
-                Card(
-                  margin: EdgeInsets.all(20),
-                  child: ListTile(
-                    title: Text('Nombre:'),
-                    subtitle: Text(
-                      this.module.title,
-                      style: TextStyle(fontSize: 30),
+                ListView(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(left: 15, right: 15),
+                      child: Text(
+                        'Descripción',
+                        style: theme.textTheme.headline6,
+                      ),
                     ),
-                  ),
-                ),
-                Card(
-                  margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
-                  child: ListTile(
-                    title: Text('Descripcion:'),
-                    subtitle: Text(
-                      this.module.description,
-                      style: TextStyle(fontSize: 30),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        color: Colors.white70,
+                      ),
+                      margin: EdgeInsets.all(15),
+                      height: 100,
+                      child: Text(module.description),
                     ),
-                  ),
-                ),
-                Card(
-                  margin: EdgeInsets.only(right: 20, left: 20, bottom: 20),
-                  child: ListTile(
-                    contentPadding: EdgeInsets.all(20),
-                    title: Text('Clases'),
-                    subtitle: Container(
-                      height: 150,
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, right: 15),
+                      child: Text(
+                        'Clases',
+                        style: theme.textTheme.headline6,
+                      ),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height,
                       child: model.isBusy
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
                           : ListView.builder(
                               // This next line does the trick.
-                              scrollDirection: Axis.horizontal,
                               itemCount: model.classes.length,
                               itemBuilder: (context, index) {
                                 var currentClass = model.classes[index];
@@ -72,7 +85,7 @@ class ModuleDetailView extends StatelessWidget {
                               },
                             ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),

@@ -37,14 +37,16 @@ class VideoCameraView extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           IconButton(
+                            color: Colors.white,
                             icon: Icon(Icons.arrow_back),
                             onPressed: () => model.onBackButtonPressed(),
                           ),
                           Spacer(),
-                          Text(model.printDuration()),
+                          Text(model.printDuration(), style: TextStyle(color: Colors.white),),
                           Spacer(),
                           IconButton(
                             icon: Icon(Icons.settings),
+                            color: Colors.white,
                             onPressed: () => null,
                           ),
                         ],
@@ -59,6 +61,7 @@ class VideoCameraView extends StatelessWidget {
                               autofocus: true,
                               iconSize: 70.0,
                               alignment: Alignment.bottomCenter,
+                              color: Colors.white,
                               icon: Icon(
                                 model.recording ? Icons.stop : Icons.play_arrow,
                               ),
