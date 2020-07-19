@@ -18,7 +18,7 @@ class ModuleOnListView extends StatelessWidget {
           margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Container(
             margin: EdgeInsets.all(20.0),
-            height: 300,
+            height: 150,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -60,28 +60,6 @@ class ModuleOnListView extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   child: Text(module.description),
-                ),
-                Container(
-                  height: 150,
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: ListView.builder(
-                    // This next line does the trick.
-                    scrollDirection: Axis.horizontal,
-                    itemCount: module.classes.length,
-                    itemBuilder: (context, index) {
-                      var currentClass = module.classes[index];
-                      return Container(
-                          width: 160.0,
-                          child: Card(
-                            child: Column(
-                              children: <Widget>[
-                                Text(currentClass.title),
-                                Text(currentClass.description),
-                              ],
-                            ),
-                          ));
-                    },
-                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
