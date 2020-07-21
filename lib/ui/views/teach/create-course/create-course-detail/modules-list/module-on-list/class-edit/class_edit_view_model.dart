@@ -1,4 +1,3 @@
-
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:my_academy/app/locator.dart';
@@ -12,7 +11,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class ClassEditViewModel extends BaseViewModel {
-
   //service injection
   NavigationService _navigationService = locator<NavigationService>();
   VideoDataService _videoDataService = locator<VideoDataService>();
@@ -24,6 +22,9 @@ class ClassEditViewModel extends BaseViewModel {
   TextEditingController _descriptionCotroller = TextEditingController();
   TextEditingController get descriptionController => this._descriptionCotroller;
 
+  Class _classToEdit;
+  Class get classToEdit => this._classToEdit;
+
   int _moduleId;
 
   CloudinaryService _cloudinaryService;
@@ -33,9 +34,6 @@ class ClassEditViewModel extends BaseViewModel {
         _titleController.text.isNotEmpty &&
         _descriptionCotroller.text.isNotEmpty;
 
-
-    
-    
     print('path: ' + _videoDataService.videoPath.toString());
     print('condicion: ' + condicion.toString());
     if (_videoDataService.videoPath != null &&
@@ -65,8 +63,14 @@ class ClassEditViewModel extends BaseViewModel {
     }
   }
 
-  onModelReady(int moduleId) {
+  onModelReady(int moduleId, Class classToEdit) {
     this._moduleId = moduleId;
+    if (classToEdit != null) {
+      this._classToEdit = classToEdit;
+      this._titleController = TextEditingController(text: classToEdit.title);
+      this._descriptionCotroller = TextEditingController(text: classToEdit.description);
+    }
+
     // TODO: hide api data
     this._cloudinaryService = CloudinaryService('627365425715361', 'NyCAm_eu42QsVET4ITzO_vVH-cc', 'dzvvvii9u');
   }

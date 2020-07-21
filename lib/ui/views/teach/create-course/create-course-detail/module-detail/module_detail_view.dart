@@ -68,60 +68,63 @@ class ModuleDetailView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             var currentClass = model.classes[index];
 
-                            return Container(
-                              height: 138,
-                              padding: EdgeInsets.all(15),
-                              child: Card(
-                                child: Row(
-                                  children: <Widget>[
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: <Widget>[
-                                        Container(
-                                          width: 100.0,
-                                          height: 100.0,
-                                          child: CachedNetworkImage(
-                                            imageUrl: currentClass.thumbnailImage,
-                                            imageBuilder: (context, imageProvider) => Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(5.0), bottomLeft: Radius.circular(5.0)),
-                                                image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.cover,
-                                                  colorFilter: ColorFilter.mode(
-                                                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                            return InkWell(
+                              onTap: () => model.onClassSelected(currentClass),
+                              child: Container(
+                                height: 138,
+                                padding: EdgeInsets.all(15),
+                                child: Card(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: <Widget>[
+                                          Container(
+                                            width: 100.0,
+                                            height: 100.0,
+                                            child: CachedNetworkImage(
+                                              imageUrl: currentClass.thumbnailImage,
+                                              imageBuilder: (context, imageProvider) => Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.only(
+                                                      topLeft: Radius.circular(5.0), bottomLeft: Radius.circular(5.0)),
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                    colorFilter: ColorFilter.mode(
+                                                        Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            currentClass.title,
-                                            style: Theme.of(context).textTheme.headline6,
-                                          ),
-                                          SizedBox(
-                                            height: 3,
-                                          ),
-                                          Container(
-                                            width: 200,
-                                            child: Text(
-                                              currentClass.description,
-                                              overflow: TextOverflow.fade,
-                                              maxLines: 4,
-                                            ),
-                                          ),
+                                          )
                                         ],
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              currentClass.title,
+                                              style: Theme.of(context).textTheme.headline6,
+                                            ),
+                                            SizedBox(
+                                              height: 3,
+                                            ),
+                                            Container(
+                                              width: 200,
+                                              child: Text(
+                                                currentClass.description,
+                                                overflow: TextOverflow.fade,
+                                                maxLines: 4,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
