@@ -49,4 +49,10 @@ class AddVideoViewModel extends ReactiveViewModel {
   /// To make the service reactive (listen variable changes)
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_videoDataService];
+
+  onModelReady(String url) {
+    if(url != null) {
+      
+    }
+  }
 }
