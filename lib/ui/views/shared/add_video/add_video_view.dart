@@ -4,11 +4,12 @@ import 'package:stacked/stacked.dart';
 import 'add_video_view_model.dart';
 
 class AddVideoView extends StatelessWidget {
-  const AddVideoView({Key key}) : super(key: key);
-
+  const AddVideoView({Key key, this.url}) : super(key: key);
+  final String url;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AddVideoViewModel>.reactive(
+      onModelReady: (model) => model.onModelReady(url),
       builder: (context, model, child) {
         return Container(
           height: MediaQuery.of(context).size.height * 0.5,
@@ -65,6 +66,13 @@ class AddVideoView extends StatelessWidget {
                       fromUrl: false,
                     )
                   : Container(),
+              Visibility(
+                visible: url != null,
+                child: KiddVideoPlayer(
+                  fromUrl: true,
+                  videoUrl: url,
+                ),
+              ),
             ],
           ),
         );

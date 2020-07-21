@@ -11,6 +11,7 @@ import 'package:my_academy/ui/views/home/home_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create_course_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create_course_detail_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/class-edit/class_edit_view.dart';
+import 'package:my_academy/models/class_model.dart';
 import 'package:my_academy/ui/views/shared/video_camera/video_camera_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/create-module/create_module_view.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/module-detail/module_detail_view.dart';
@@ -90,8 +91,10 @@ class Router extends RouterBase {
         }
         final typedArgs = args as ClassEditViewArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (context) =>
-              ClassEditView(key: typedArgs.key, moduleId: typedArgs.moduleId),
+          builder: (context) => ClassEditView(
+              key: typedArgs.key,
+              moduleId: typedArgs.moduleId,
+              classToEdit: typedArgs.classToEdit),
           settings: settings,
         );
       case Routes.videoCameraView:
@@ -177,7 +180,8 @@ class CreateCourseDetailViewArguments {
 class ClassEditViewArguments {
   final Key key;
   final int moduleId;
-  ClassEditViewArguments({this.key, @required this.moduleId});
+  final Class classToEdit;
+  ClassEditViewArguments({this.key, @required this.moduleId, this.classToEdit});
 }
 
 //VideoCameraView arguments holder class

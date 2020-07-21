@@ -6,7 +6,6 @@ import 'package:my_academy/models/module_model.dart';
 import 'package:my_academy/services/api/classes_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:video_player/video_player.dart';
 
 class ModuleDetailViewModel extends BaseViewModel {
   /// service injection
@@ -17,7 +16,6 @@ class ModuleDetailViewModel extends BaseViewModel {
   List<Class> get classes => this._classes;
 
   Module _module;
-
 
   onModelReady(Module module) async {
     setBusy(true);
@@ -38,5 +36,16 @@ class ModuleDetailViewModel extends BaseViewModel {
 
   void updateUI() {
     notifyListeners();
+  }
+
+  onClassSelected(Class currentClass) async {
+    ClassEditViewArguments classEditViewArguments =
+        ClassEditViewArguments(moduleId: this._module.id, classToEdit: currentClass);
+    bool result = await _navigationService.navigateTo(Routes.classEditView, arguments: classEditViewArguments);
+    if (result != null && result) {
+      setBusy(true);
+      this._classes = await _classesService.getClassesByModuleId(this._module.id);
+      setBusy(false);
+    }
   }
 }
