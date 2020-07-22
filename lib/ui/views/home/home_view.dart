@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:stacked/stacked.dart';
 import 'home_view_model.dart';
 
@@ -10,6 +11,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return !model.isBusy
             ? Scaffold(
                 body: IndexedStack(
@@ -21,18 +23,18 @@ class HomeView extends StatelessWidget {
                   type: BottomNavigationBarType.fixed,
                   onTap: model.onTap,
                   currentIndex: model.currentIndex,
-                  items: const <BottomNavigationBarItem>[
+                  items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
                       icon: Icon(Icons.search),
-                      title: Text('Buscar'),
+                      title: Text(localeValues['search'],),
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.school),
-                      title: Text('Escuela'),
+                      title: Text(localeValues['school'],),
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.extension),
-                      title: Text('Crear'),
+                      title: Text(localeValues['create'],),
                     ),
                     // BottomNavigationBarItem(
                     //   icon: Icon(Icons.equalizer),
@@ -40,7 +42,7 @@ class HomeView extends StatelessWidget {
                     // ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.person),
-                      title: Text('Perfil'),
+                      title: Text(localeValues['profile']),
                     ),
                   ],
                 ),

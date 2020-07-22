@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/ui/views/profile/profile_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -66,6 +67,7 @@ class ProfileView extends StatelessWidget {
                           ),
                         ],
                       ),
+                      Text(AppLocalizations.of(context).values['title'],),
                     ],
                   ),
                 )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/user_model.dart';
 import 'package:my_academy/services/api/users_service.dart';
 import 'package:stacked/stacked.dart';
@@ -43,7 +44,7 @@ class SignUpViewModel extends BaseViewModel {
   String _errorMessage = "";
   String get errorMessage => this._errorMessage;
 
-  Future<void> signIn() async {
+  Future<void> signIn(BuildContext context) async {
     this._loading = true;
     this._hasErrors = false;
     notifyListeners();
@@ -55,7 +56,7 @@ class SignUpViewModel extends BaseViewModel {
       if(e is PlatformException) {
         this._errorMessage = e.message;
       } else {
-        this._errorMessage = 'Error inesperado';
+        this._errorMessage = AppLocalizations.of(context).values['unexpected_error'];
       }
       this._hasErrors = true;
     } finally {
@@ -64,7 +65,7 @@ class SignUpViewModel extends BaseViewModel {
     }
   }
 
-    Future<void> signUp() async {
+    Future<void> signUp(BuildContext context) async {
     this._loading = true;
     this._hasErrors = false;
     notifyListeners();
@@ -76,7 +77,7 @@ class SignUpViewModel extends BaseViewModel {
       if(e is PlatformException) {
         this._errorMessage = e.message;
       } else {
-        this._errorMessage = 'Error inesperado';
+        this._errorMessage = AppLocalizations.of(context).values['unexpected_error'];
       }
       this._hasErrors = true;
     } finally {

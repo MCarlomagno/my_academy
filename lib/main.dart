@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -31,6 +33,16 @@ class MyApp extends StatelessWidget {
       //       //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
       //       ),
       // ),
+      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).values['title'],
+      localizationsDelegates: [
+        const DemoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', ''),
+        const Locale('es', ''),
+      ],
       theme: ThemeData(
         // Define the default brightness and colors.
         brightness: Brightness.light,

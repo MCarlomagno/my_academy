@@ -18,7 +18,7 @@ class ModuleOnListView extends StatelessWidget {
           margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Container(
             margin: EdgeInsets.all(20.0),
-            height: 150,
+            height: 170,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -59,7 +59,7 @@ class ModuleOnListView extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(module.description),
+                  child: Text(module.description, maxLines: 2,),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
