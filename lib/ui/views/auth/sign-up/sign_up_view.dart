@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/ui/views/auth/sign-up/sign_up_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -8,6 +9,7 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SignUpViewModel>.reactive(
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return DefaultTabController(
           initialIndex: 1,
           length: 2,
@@ -19,11 +21,11 @@ class SignUpView extends StatelessWidget {
                 tabs: [
                   Tab(
                     icon: Icon(Icons.exit_to_app),
-                    text: "Iniciar Sesión",
+                    text: localeValues['sign_in'],
                   ),
                   Tab(
                     icon: Icon(Icons.person_add),
-                    text: "Registrarse",
+                    text: localeValues['sign_up'],
                   ),
                 ],
               ),
@@ -42,6 +44,7 @@ class SignUpView extends StatelessWidget {
   }
 
   Widget _signInView(BuildContext context, SignUpViewModel model) {
+    var localeValues = AppLocalizations.of(context).values;
     var theme = Theme.of(context);
     final _formKey = GlobalKey<FormState>();
     return Container(
@@ -53,13 +56,13 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Email requerido';
+                  return localeValues['email_required'];
                 }
                 return null;
               },
               controller: model.emailController,
               decoration: InputDecoration(
-                  labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  labelText: localeValues['email'], border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             SizedBox(
               height: 30,
@@ -67,14 +70,14 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Contraseña requerida';
+                  return  localeValues['password_required'];
                 }
                 return null;
               },
               obscureText: true,
               controller: model.passwordController,
               decoration: InputDecoration(
-                  labelText: "Contraseña",
+                  labelText: localeValues['password'],
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             Spacer(),
@@ -95,13 +98,13 @@ class SignUpView extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        "Iniciar Sesión",
+                        localeValues['sign_in'],
                         style: TextStyle(color: Colors.white),
                       ),
                 onPressed: !model.loading
                     ? () {
                         if (_formKey.currentState.validate()) {
-                          model.signIn();
+                          model.signIn(context);
                         }
                       }
                     : null,
@@ -116,6 +119,7 @@ class SignUpView extends StatelessWidget {
   Widget _signUpView(BuildContext context, SignUpViewModel model) {
     var theme = Theme.of(context);
     final _formKey = GlobalKey<FormState>();
+    var localeValues = AppLocalizations.of(context).values;
     return Container(
       margin: EdgeInsets.all(30),
       child: Form(
@@ -126,13 +130,13 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Email requerido';
+                  return localeValues['email_required'];
                 }
                 return null;
               },
               controller: model.emailSignUpController,
               decoration: InputDecoration(
-                  labelText: "Email", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  labelText: localeValues['email'], border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             SizedBox(
               height: 30,
@@ -143,14 +147,14 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Contraseña requerida';
+                  return localeValues['password_required'];
                 }
                 return null;
               },
               obscureText: true,
               controller: model.passwordSignUpController,
               decoration: InputDecoration(
-                  labelText: "Contraseña",
+                  labelText: localeValues['password'],
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             SizedBox(
@@ -162,13 +166,13 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Nombe requerido';
+                  return localeValues['name_required'];
                 }
                 return null;
               },
               controller: model.nameController,
               decoration: InputDecoration(
-                  labelText: "Nombre", border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  labelText: localeValues['name'], border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             SizedBox(
               height: 30,
@@ -176,13 +180,13 @@ class SignUpView extends StatelessWidget {
             TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Apellido requerido';
+                  return localeValues['surname_required'];
                 }
                 return null;
               },
               controller: model.surnameController,
               decoration: InputDecoration(
-                  labelText: "Apellido",
+                  labelText: localeValues['surname'],
                   border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))),
             ),
             Spacer(),
@@ -203,13 +207,13 @@ class SignUpView extends StatelessWidget {
                         ),
                       )
                     : Text(
-                        "Registrarse",
+                        localeValues['sign_up'],
                         style: TextStyle(color: Colors.white),
                       ),
                 onPressed: !model.loading
                     ? () {
                         if (_formKey.currentState.validate()) {
-                          model.signUp();
+                          model.signUp(context);
                         }
                       }
                     : null,
