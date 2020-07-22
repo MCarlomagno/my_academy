@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_academy/models/course_model.dart';
+import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/module_on_list_view.dart';
 import 'package:stacked/stacked.dart';
 import 'course_on_search_detail_view_model.dart';
 
@@ -76,7 +77,13 @@ class CourseOnDetailView extends StatelessWidget {
                       ),
                       margin: EdgeInsets.all(15),
                       height: 100,
-                      child: Text(course.description),
+                      child: Container(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          course.description,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
@@ -85,25 +92,19 @@ class CourseOnDetailView extends StatelessWidget {
                         style: theme.textTheme.headline6,
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: Colors.white70,
-                      ),
-                      margin: EdgeInsets.all(15),
-                      padding: EdgeInsets.all(10),
-                      height: 150,
-                      child: model.isBusy
-                          ? Center(child: CircularProgressIndicator())
-                          : ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                    model.isBusy
+                        ? Center(child: CircularProgressIndicator())
+                        : Container(
+                            height: model.modules.length * 250.0,
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
                               itemCount: model.modules.length,
                               itemBuilder: (context, index) {
                                 var module = model.modules[index];
-                                return Card(child: Text(module.title));
+                                return ModuleOnListView(module: module);
                               },
                             ),
-                    ),
+                          ),
                   ],
                 ),
                 !model.enrolledToCourse && model.isLoggedIn
@@ -118,7 +119,13 @@ class CourseOnDetailView extends StatelessWidget {
                             color: theme.primaryColor,
                             onPressed: () => model.enrollCourse(course.id),
                             child: model.enrollingCourse
-                                ? SizedBox( height: 25, width: 25 ,child: CircularProgressIndicator(strokeWidth: 3.0,),)
+                                ? SizedBox(
+                                    height: 25,
+                                    width: 25,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 3.0,
+                                    ),
+                                  )
                                 : Text(
                                     'Inscribirme',
                                     style: TextStyle(color: Colors.white),
