@@ -9,7 +9,7 @@ class ProfileViewModel extends BaseViewModel {
   UsersService _usersService = locator<UsersService>();
   NavigationService _navigationService = locator<NavigationService>();
 
-  String get photoUrl => this._user.imageUrl;
+  String get photoUrl => this._user.imageUrl ?? "https://res.cloudinary.com/dzvvvii9u/image/upload/v1595374514/images_z5wxoc.png";
 
   String get name => this._user.name + ' ' + this._user.surname;
 

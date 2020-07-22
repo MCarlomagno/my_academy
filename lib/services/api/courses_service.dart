@@ -31,14 +31,16 @@ class CoursesService {
   Future<List<Course>> getUserCreatedCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _usersService.user.id.toString();
-      int beforeRequest = DateTime.now().millisecondsSinceEpoch;
-      var response = await http.get(getUserCoursesUrl);
-      int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
-      print('latencia:' + latency.toString());
-      var coursesJsonList = jsonDecode(response.body);
-      for (var courseJson in coursesJsonList) {
-        courses.add(Course.fromJson(courseJson));
+      if (_usersService.user != null) {
+        var getUserCoursesUrl = this.url + '/getUserCreatedCourses/' + _usersService.user.id.toString();
+        int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+        var response = await http.get(getUserCoursesUrl);
+        int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+        print('latencia:' + latency.toString());
+        var coursesJsonList = jsonDecode(response.body);
+        for (var courseJson in coursesJsonList) {
+          courses.add(Course.fromJson(courseJson));
+        }
       }
       return courses;
     } catch (e) {
@@ -50,14 +52,16 @@ class CoursesService {
   Future<List<Course>> getUserEnrolledCourses() async {
     try {
       List<Course> courses = [];
-      var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _usersService.user.id.toString();
-      int beforeRequest = DateTime.now().millisecondsSinceEpoch;
-      var response = await http.get(getUserCoursesUrl);
-      int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
-      print('latencia:' + latency.toString());
-      var coursesJsonList = jsonDecode(response.body);
-      for (var courseJson in coursesJsonList) {
-        courses.add(Course.fromJson(courseJson));
+      if (_usersService.user != null) {
+        var getUserCoursesUrl = this.url + '/getEnrollmentsByUserId/' + _usersService.user.id.toString();
+        int beforeRequest = DateTime.now().millisecondsSinceEpoch;
+        var response = await http.get(getUserCoursesUrl);
+        int latency = DateTime.now().millisecondsSinceEpoch - beforeRequest;
+        print('latencia:' + latency.toString());
+        var coursesJsonList = jsonDecode(response.body);
+        for (var courseJson in coursesJsonList) {
+          courses.add(Course.fromJson(courseJson));
+        }
       }
       return courses;
     } catch (e) {
