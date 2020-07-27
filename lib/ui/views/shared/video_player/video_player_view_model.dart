@@ -49,9 +49,6 @@ class VideoPlayerViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  ///
-  /// TODO implement documentation
-  ///
   String printDuration(Duration duration) {
     if (duration != null) {
       String twoDigits(int n) {
@@ -67,9 +64,6 @@ class VideoPlayerViewModel extends BaseViewModel {
     }
   }
 
-  ///
-  ///  TODO implement documentation
-  /// 
   startStreaming() {
     if (!isBusy) {
       _streamToProgress = this._controller.position.asStream();
