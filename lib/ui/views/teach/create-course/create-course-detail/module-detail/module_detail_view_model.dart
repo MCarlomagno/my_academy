@@ -25,7 +25,7 @@ class ModuleDetailViewModel extends BaseViewModel {
   }
 
   createClass(Key key) async {
-    ClassEditViewArguments classEditViewArguments = ClassEditViewArguments(key: key, moduleId: this._module.id);
+    ClassEditViewArguments classEditViewArguments = ClassEditViewArguments(key: key, moduleId: this._module.id,fromOwner: true );
     bool result = await _navigationService.navigateTo(Routes.classEditView, arguments: classEditViewArguments);
     if (result != null && result) {
       setBusy(true);
@@ -38,9 +38,9 @@ class ModuleDetailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  onClassSelected(Class currentClass) async {
+  onClassSelected(Class currentClass, bool fromOwner) async {
     ClassEditViewArguments classEditViewArguments =
-        ClassEditViewArguments(moduleId: this._module.id, classToEdit: currentClass);
+        ClassEditViewArguments(moduleId: this._module.id, classToEdit: currentClass, fromOwner: fromOwner);
     bool result = await _navigationService.navigateTo(Routes.classEditView, arguments: classEditViewArguments);
     if (result != null && result) {
       setBusy(true);

@@ -5,8 +5,9 @@ import 'package:stacked/stacked.dart';
 import 'module_on_list_view_model.dart';
 
 class ModuleOnListView extends StatelessWidget {
-  const ModuleOnListView({Key key, @required this.module}) : super(key: key);
+  const ModuleOnListView({Key key, @required this.module, @required this.fromOwner}) : super(key: key);
   final Module module;
+  final bool fromOwner;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ModuleOnListViewModel>.nonReactive(
@@ -69,7 +70,7 @@ class ModuleOnListView extends StatelessWidget {
                     FloatingActionButton(
                       heroTag: null,
                       elevation: 0,
-                      onPressed: () => model.openModuleDetail(key, module),
+                      onPressed: () => model.openModuleDetail(key, module, fromOwner),
                       child: Icon(Icons.arrow_forward),
                     ),
                   ],

@@ -23,7 +23,7 @@ class CreateCourseDetailView extends StatelessWidget {
           ),
           body: model.isBusy
               ? Center(child: CircularProgressIndicator())
-              : Container(child: ModulesListView(modules: model.modules)),
+              : Container(child: ModulesListView(modules: model.modules, fromOwner: true,)),
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,
             onPressed: model.createModule,
