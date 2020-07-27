@@ -51,7 +51,7 @@ class HomeView extends StatelessWidget {
               body: Container(
                 color: Colors.white,
                 child: Center(
-                  child: Text("My Academy", style: TextStyle(fontFamily: "Roboto"),),
+                  child: Image.asset('assets/launcher/icon.png',width:200,height:200),
                 ),
               ),
             );
