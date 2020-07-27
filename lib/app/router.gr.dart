@@ -94,7 +94,8 @@ class Router extends RouterBase {
           builder: (context) => ClassEditView(
               key: typedArgs.key,
               moduleId: typedArgs.moduleId,
-              classToEdit: typedArgs.classToEdit),
+              classToEdit: typedArgs.classToEdit,
+              fromOwner: typedArgs.fromOwner),
           settings: settings,
         );
       case Routes.videoCameraView:
@@ -123,8 +124,10 @@ class Router extends RouterBase {
         }
         final typedArgs = args as ModuleDetailViewArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (context) =>
-              ModuleDetailView(key: typedArgs.key, module: typedArgs.module),
+          builder: (context) => ModuleDetailView(
+              key: typedArgs.key,
+              module: typedArgs.module,
+              fromOwner: typedArgs.fromOwner),
           settings: settings,
         );
       case Routes.courseOnSearchDetailView:
@@ -181,7 +184,12 @@ class ClassEditViewArguments {
   final Key key;
   final int moduleId;
   final Class classToEdit;
-  ClassEditViewArguments({this.key, @required this.moduleId, this.classToEdit});
+  final bool fromOwner;
+  ClassEditViewArguments(
+      {this.key,
+      @required this.moduleId,
+      this.classToEdit,
+      @required this.fromOwner});
 }
 
 //VideoCameraView arguments holder class
@@ -201,7 +209,9 @@ class CreateModuleViewArguments {
 class ModuleDetailViewArguments {
   final Key key;
   final Module module;
-  ModuleDetailViewArguments({this.key, @required this.module});
+  final bool fromOwner;
+  ModuleDetailViewArguments(
+      {this.key, @required this.module, @required this.fromOwner});
 }
 
 //CourseOnDetailView arguments holder class
