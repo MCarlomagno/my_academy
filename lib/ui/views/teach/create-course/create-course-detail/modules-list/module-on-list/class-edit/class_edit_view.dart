@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/class_model.dart';
 import 'package:my_academy/ui/views/shared/add_video/add_video_view.dart';
 import 'package:stacked/stacked.dart';
@@ -15,9 +16,10 @@ class ClassEditView extends StatelessWidget {
     return ViewModelBuilder<ClassEditViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(moduleId, classToEdit),
       builder: (context, model, child) {
+        var localValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text('Editar clase'),
+            title: Text(localValues['edit_class']),
             actions: <Widget>[
               Visibility(
                 visible:this.classToEdit == null,
@@ -42,7 +44,7 @@ class ClassEditView extends StatelessWidget {
                           controller: model.titleController,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
-                            labelText: "Título",
+                            labelText: localValues['title'],
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -58,7 +60,7 @@ class ClassEditView extends StatelessWidget {
                           minLines: 4,
                           maxLines: 5,
                           decoration: InputDecoration(
-                            labelText: "Descripción",
+                            labelText: localValues['description'],
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),

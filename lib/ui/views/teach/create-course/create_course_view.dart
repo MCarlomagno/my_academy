@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:stacked/stacked.dart';
 import 'create_course_view_model.dart';
 
@@ -9,9 +10,10 @@ class CreateCourseView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreateCourseViewModel>.reactive(
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text('Crear curso'),
+            title: Text(localeValues['create']),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => model.onCancel(),
@@ -36,7 +38,7 @@ class CreateCourseView extends StatelessWidget {
                       TextField(
                         controller: model.titleController,
                         decoration: InputDecoration(
-                          labelText: "Título",
+                          labelText: localeValues['title'],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
@@ -50,7 +52,7 @@ class CreateCourseView extends StatelessWidget {
                         minLines: 5,
                         maxLines: 5,
                         decoration: InputDecoration(
-                          labelText: "Descripción",
+                          labelText: localeValues['description'],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),

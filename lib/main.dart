@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/app/locator.dart';
 import 'package:my_academy/app/router.gr.dart';
+import 'package:my_academy/ui/views/intro/intro.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void main() {
@@ -56,6 +57,8 @@ class MyApp extends StatelessWidget {
             //   headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             ),
       ),
+      //home: IntroScreen(),
+      debugShowCheckedModeBanner: false,
       initialRoute: Routes.homeViewRoute,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: locator<NavigationService>().navigatorKey,

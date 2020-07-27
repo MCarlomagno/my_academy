@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:stacked/stacked.dart';
 import 'course_on_search_detail_view_model.dart';
@@ -15,6 +16,7 @@ class CourseOnSearchDetailView extends StatelessWidget {
     return ViewModelBuilder<CourseOnSearchDetailViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(this.course.id),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return Scaffold(
           body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -65,7 +67,7 @@ class CourseOnSearchDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(
-                        'Descripción',
+                        localeValues['description'],
                         style: theme.textTheme.headline6,
                       ),
                     ),
@@ -81,7 +83,7 @@ class CourseOnSearchDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(
-                        'Módulos',
+                        localeValues['modules'],
                         style: theme.textTheme.headline6,
                       ),
                     ),
@@ -120,7 +122,7 @@ class CourseOnSearchDetailView extends StatelessWidget {
                             child: model.enrollingCourse
                                 ? SizedBox( height: 25, width: 25 ,child: CircularProgressIndicator(strokeWidth: 3.0,),)
                                 : Text(
-                                    'Inscribirme',
+                                    localeValues['enroll'],
                                     style: TextStyle(color: Colors.white),
                                   ),
                           ),

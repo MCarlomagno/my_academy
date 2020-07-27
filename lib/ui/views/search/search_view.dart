@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_academy/app/locator.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:my_academy/services/ui_services/search_view_service.dart';
 import 'package:my_academy/ui/views/search/last-created-course/last_created_course_view.dart';
@@ -18,16 +19,17 @@ class SearchView extends StatelessWidget {
     return ViewModelBuilder<SearchViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text("Buscar cursos"),
+            title: Text(localeValues['search_courses']),
             actions: <Widget>[
               IconButton(
                 icon: Icon(Icons.search),
                 onPressed: () {
                   showSearch(
                     context: context,
-                    delegate: CustomSearchDelegate(),
+                    delegate: CustomSearchDelegate(AppLocalizations.of(context).values),
                   );
                 },
               ),
@@ -47,7 +49,7 @@ class SearchView extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          "Recomendados para vos",
+                          localeValues['recommended'],
                           style: theme.textTheme.headline5,
                           textAlign: TextAlign.center,
                         ),
@@ -65,7 +67,7 @@ class SearchView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Más populares",
+                          localeValues['popular'],
                           style: theme.textTheme.headline5,
                           textAlign: TextAlign.center,
                         ),
@@ -83,7 +85,7 @@ class SearchView extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Últimos credos",
+                          localeValues['last_created'],
                           style: theme.textTheme.headline5,
                           textAlign: TextAlign.center,
                         ),
@@ -113,8 +115,12 @@ class SearchView extends StatelessWidget {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
+  CustomSearchDelegate(this.localeValues);
+
+  var localeValues;
+
   @override
-  String get searchFieldLabel => 'Buscar';
+  String get searchFieldLabel => localeValues['search'];
 
   SearchViewService _searchViewService = locator<SearchViewService>();
 
@@ -130,7 +136,10 @@ class CustomSearchDelegate extends SearchDelegate {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear, color: Colors.black,),
+        icon: Icon(
+          Icons.clear,
+          color: Colors.black,
+        ),
         onPressed: () {
           query = '';
         },
@@ -141,7 +150,10 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back, color: Colors.black,),
+      icon: Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+      ),
       onPressed: () {
         close(context, null);
       },
@@ -156,7 +168,7 @@ class CustomSearchDelegate extends SearchDelegate {
         children: <Widget>[
           Center(
             child: Text(
-              "La busqueda debe tener al menos 3 letras.",
+              AppLocalizations.of(context).values['at_least_three_letters'],
             ),
           )
         ],
@@ -189,20 +201,25 @@ class CustomSearchDelegate extends SearchDelegate {
               return Column(
                 children: <Widget>[
                   Text(
-                    "No se encontraron resultados.",
+                    localeValues['not_results_found'],
                   ),
                 ],
               );
             } else {
               var results = snapshot.data;
-              return ListView.builder(
-                itemCount: results.length,
-                itemBuilder: (context, index) {
-                  var result = results[index];
-                  return ListTile(
-                    title: Text(result.title),
-                  );
-                },
+              return SingleChildScrollView(
+                child: Container(
+                  height: results.length * 100.0,
+                  child: ListView.builder(
+                    itemCount: results.length,
+                    itemBuilder: (context, index) {
+                      var result = results[index];
+                      return ListTile(
+                        title: Text(result.title),
+                      );
+                    },
+                  ),
+                ),
               );
             }
           },

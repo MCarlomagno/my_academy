@@ -42,7 +42,6 @@ class CreateCourseDetailViewModel extends BaseViewModel {
     bool result = await _navigationService.navigateTo(Routes.createModuleView, arguments: createModuleViewArguments);
     setBusy(true);
     if(result != null && result) {
-      print('espera a que cargue los modulos');
       this._modules = await _modulesService.getModulesByCourseId(this._courseId);
     }
     setBusy(false);

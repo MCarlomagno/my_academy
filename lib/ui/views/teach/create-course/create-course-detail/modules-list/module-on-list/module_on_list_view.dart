@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/module_model.dart';
 import 'package:stacked/stacked.dart';
 import 'module_on_list_view_model.dart';
@@ -10,6 +11,7 @@ class ModuleOnListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ModuleOnListViewModel>.nonReactive(
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -46,7 +48,7 @@ class ModuleOnListView extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  "Borrar módulo",
+                                  localeValues['delete_module'],
                                   style: TextStyle(color: Colors.redAccent),
                                 ),
                               ],

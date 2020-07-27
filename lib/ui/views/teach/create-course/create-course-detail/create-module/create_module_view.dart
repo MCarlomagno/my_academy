@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:stacked/stacked.dart';
 import 'create_module_view_model.dart';
 
@@ -11,9 +12,10 @@ class CreateModuleView extends StatelessWidget {
     return ViewModelBuilder<CreateModuleViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(this.courseId),
       builder: (context, model, child) {
+        var localValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text('Crear modulo'),
+            title: Text(localValues['create_module']),
             actions: <Widget>[
               IconButton(
                 icon: Icon(
@@ -34,7 +36,7 @@ class CreateModuleView extends StatelessWidget {
                       TextField(
                         controller: model.titleController,
                         decoration: InputDecoration(
-                          labelText: "Título",
+                          labelText: localValues['title'],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
@@ -48,7 +50,7 @@ class CreateModuleView extends StatelessWidget {
                         minLines: 5,
                         maxLines: 5,
                         decoration: InputDecoration(
-                          labelText: "Descripción",
+                          labelText: localValues['description'],
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(10),
