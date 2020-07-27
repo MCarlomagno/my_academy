@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/ui/views/school/school_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,10 +14,11 @@ class SchoolView extends StatelessWidget {
     return ViewModelBuilder<SchoolViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         if (model.isLoggedIn) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Mis Cursos'),
+              title: Text(localeValues['my_courses']),
             ),
             body: Center(
                 child: model.isBusy
@@ -40,7 +42,7 @@ class SchoolView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Text(
-                  "Siempre hay una buena excusa para aprender algo nuevo.",
+                  localeValues['school_not_logged'],
                   style: theme.textTheme.headline4,
                 ),
               ),
@@ -58,7 +60,7 @@ class SchoolView extends StatelessWidget {
                   shape: StadiumBorder(),
                   onPressed: () => model.navigateToSignUp(),
                   child: Text(
-                    "Aprender",
+                    localeValues['learn'],
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),

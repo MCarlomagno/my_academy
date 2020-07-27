@@ -87,15 +87,11 @@ class VideoCameraViewModel extends BaseViewModel {
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {});
 
-    print('FILE PATH');
-    print(filePath);
-
     try {
       await _controller.startVideoRecording(filePath);
       startTimerRecording();
       videoPath = filePath;
     } on CameraException catch (e) {
-      print('ERROR INICIANDO EL VIDEO: ' + e.toString());
       return null;
     }
 
@@ -118,14 +114,10 @@ class VideoCameraViewModel extends BaseViewModel {
       ]);
       _navigationService.back(result: true);
     } on CameraException catch (e) {
-      print('ERROR FINALIZANDO EL VIDEO: ' + e.toString());
       return null;
     }
   }
 
-  ///
-  /// TODO implement documentation
-  /// 
   String printDuration() {
     Duration duration = Duration(seconds: _secondsRecorded);
     String twoDigits(int n) {

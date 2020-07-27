@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:my_academy/ui/views/teach/create-course/create-course-detail/modules-list/module-on-list/module_on_list_view.dart';
 import 'package:stacked/stacked.dart';
@@ -13,6 +14,7 @@ class CourseOnDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var localeValues = AppLocalizations.of(context).values;
     return ViewModelBuilder<CourseOnDetailViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(this.course.id),
       builder: (context, model, child) {
@@ -66,7 +68,7 @@ class CourseOnDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(
-                        'Descripción',
+                        localeValues['description'],
                         style: theme.textTheme.headline6,
                       ),
                     ),
@@ -88,7 +90,7 @@ class CourseOnDetailView extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
                       child: Text(
-                        'Módulos',
+                        localeValues['modules'],
                         style: theme.textTheme.headline6,
                       ),
                     ),
@@ -127,7 +129,7 @@ class CourseOnDetailView extends StatelessWidget {
                                     ),
                                   )
                                 : Text(
-                                    'Inscribirme',
+                                    localeValues['enroll'],
                                     style: TextStyle(color: Colors.white),
                                   ),
                           ),

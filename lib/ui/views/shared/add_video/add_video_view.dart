@@ -66,13 +66,12 @@ class AddVideoView extends StatelessWidget {
                       fromUrl: false,
                     )
                   : Container(),
-              Visibility(
-                visible: url != null,
-                child: KiddVideoPlayer(
-                  fromUrl: true,
-                  videoUrl: url,
-                ),
-              ),
+              this.url != null
+                  ? KiddVideoPlayer(
+                      fromUrl: true,
+                      videoUrl: url,
+                    )
+                  : Container(),
             ],
           ),
         );

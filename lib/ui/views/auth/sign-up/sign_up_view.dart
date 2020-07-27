@@ -16,7 +16,7 @@ class SignUpView extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset:false,
             appBar: AppBar(
-              title: Text('Ingresar'),
+              title: Text(localeValues['enter']),
               bottom: TabBar(
                 tabs: [
                   Tab(

@@ -50,4 +50,8 @@ class CourseOnDetailViewModel extends BaseViewModel {
     this._enrollingCourse = false;
     notifyListeners();
   }
+  @override
+  void dispose() {
+    
+  }
 }
