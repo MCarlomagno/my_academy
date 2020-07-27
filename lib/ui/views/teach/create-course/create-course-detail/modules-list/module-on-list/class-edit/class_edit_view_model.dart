@@ -30,12 +30,6 @@ class ClassEditViewModel extends BaseViewModel {
   CloudinaryService _cloudinaryService;
 
   onConfirm() async {
-    var condicion = _videoDataService.videoPath != null &&
-        _titleController.text.isNotEmpty &&
-        _descriptionCotroller.text.isNotEmpty;
-
-    print('path: ' + _videoDataService.videoPath.toString());
-    print('condicion: ' + condicion.toString());
     if (_videoDataService.videoPath != null &&
         _titleController.text.isNotEmpty &&
         _descriptionCotroller.text.isNotEmpty) {
@@ -56,8 +50,6 @@ class ClassEditViewModel extends BaseViewModel {
           thumbnailImage: thumbnailImage);
       Class createdClass = await _classesService.createClass(currentClass);
 
-      print('after');
-      print(createdClass.thumbnailImage);
       setBusy(false);
       _navigationService.back(result: true);
     }

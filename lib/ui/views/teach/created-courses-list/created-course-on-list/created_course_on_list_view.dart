@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/course_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,6 +14,7 @@ class CreatedCourseOnListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<CreatedCourseOnListViewModel>.nonReactive(
       builder: (context, model, child) {
+        var localValues = AppLocalizations.of(context).values;
         final textTheme = Theme.of(context).textTheme;
         return Card(
           shape: RoundedRectangleBorder(
@@ -74,9 +76,9 @@ class CreatedCourseOnListView extends StatelessWidget {
                             child: PopupMenuButton(
                               icon: Icon(Icons.more_vert, color: Colors.white,),
                               itemBuilder: (context) => <PopupMenuEntry<dynamic>>[
-                                const PopupMenuItem<dynamic>(
+                                PopupMenuItem<dynamic>(
                                   value: 1,
-                                  child: Text('Borrar'),
+                                  child: Text(localValues['delete']),
                                 )
                               ],
                             ),

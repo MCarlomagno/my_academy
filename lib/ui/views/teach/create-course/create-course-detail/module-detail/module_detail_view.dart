@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/models/module_model.dart';
 import 'package:stacked/stacked.dart';
-import 'package:video_player/video_player.dart';
 import 'module_detail_view_model.dart';
 
 class ModuleDetailView extends StatelessWidget {
@@ -17,6 +17,7 @@ class ModuleDetailView extends StatelessWidget {
       },
       builder: (context, model, child) {
         var theme = Theme.of(context);
+        var localeValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
             title: Text(module.title),
@@ -29,7 +30,7 @@ class ModuleDetailView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 15, right: 15, top: 15),
                   child: Text(
-                    'Descripción',
+                    localeValues['description'],
                     style: theme.textTheme.headline6,
                   ),
                 ),
@@ -52,7 +53,7 @@ class ModuleDetailView extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left: 15, right: 15),
                   child: Text(
-                    'Clases',
+                    localeValues['classes'],
                     style: theme.textTheme.headline6,
                   ),
                 ),
@@ -144,7 +145,7 @@ class ModuleDetailView extends StatelessWidget {
               label: Row(
                 children: <Widget>[
                   Icon(Icons.add),
-                  Text('Crear clase'),
+                  Text(localeValues['create_class']),
                 ],
               )),
         );

@@ -36,7 +36,6 @@ class AddVideoViewModel extends ReactiveViewModel {
 
   void getVideoFromCamera() async {
     bool result = await _navigationService.navigateTo(Routes.videoCameraView);
-    print('Resultado de uso de camara: ' + result.toString());
     if(result != null && result && _videoDataService.videoLoaded) {
       _videoFile = File(_videoDataService.videoPath);
       _videoDataService.setVideoPlayerOpened(true);
@@ -51,8 +50,5 @@ class AddVideoViewModel extends ReactiveViewModel {
   List<ReactiveServiceMixin> get reactiveServices => [_videoDataService];
 
   onModelReady(String url) {
-    if(url != null) {
-      
-    }
   }
 }

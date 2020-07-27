@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:stacked/stacked.dart';
 import 'create_course_detail_view_model.dart';
 import 'modules-list/modules_list_view.dart';
@@ -11,9 +12,10 @@ class CreateCourseDetailView extends StatelessWidget {
     return ViewModelBuilder<CreateCourseDetailViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(this.courseId),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text('Módulos de tu curso'),
+            title: Text(localeValues['course_modules']),
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => model.onBackButtonPressed(),
@@ -25,7 +27,7 @@ class CreateCourseDetailView extends StatelessWidget {
           floatingActionButton: FloatingActionButton.extended(
             isExtended: true,
             onPressed: model.createModule,
-            label: Text("Crear módulo"),
+            label: Text(localeValues['create_module']),
             icon: Icon(Icons.add),
           ),
         );

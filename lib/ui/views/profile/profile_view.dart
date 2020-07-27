@@ -15,6 +15,7 @@ class ProfileView extends StatelessWidget {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         if (model.isLoggedIn) {
           return !model.isBusy
               ? SafeArea(
@@ -67,7 +68,6 @@ class ProfileView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(AppLocalizations.of(context).values['title'],),
                     ],
                   ),
                 )
@@ -81,7 +81,7 @@ class ProfileView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Text(
-                  "Unirte te da la oportunidad de compartir lo que sabes",
+                  localeValues['profile_not_logged'],
                   style: theme.textTheme.headline4,
                 ),
               ),
@@ -99,7 +99,7 @@ class ProfileView extends StatelessWidget {
                   shape: StadiumBorder(),
                   onPressed: () => model.navigateToSignUp(),
                   child: Text(
-                    "Registrarse",
+                    localeValues['sign_up'],
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),

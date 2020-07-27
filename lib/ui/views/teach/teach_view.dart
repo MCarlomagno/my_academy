@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_academy/config/app-localizations.dart';
 import 'package:my_academy/ui/views/teach/teach_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -13,10 +14,11 @@ class TeachView extends StatelessWidget {
     return ViewModelBuilder<TeachViewModel>.reactive(
       onModelReady: (model) => model.onModelReady(),
       builder: (context, model, child) {
+        var localeValues = AppLocalizations.of(context).values;
         if (model.isLoggedIn) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Cursos creados'),
+              title: Text(localeValues['created_courses']),
             ),
             body: RefreshIndicator(
                 onRefresh: () => model.reload(),
@@ -37,7 +39,7 @@ class TeachView extends StatelessWidget {
             floatingActionButton: FloatingActionButton.extended(
               isExtended: true,
               onPressed: model.onCreate,
-              label: Text("Crear"),
+              label: Text(localeValues['create']),
               icon: Icon(Icons.add),
             ),
           );
@@ -48,7 +50,7 @@ class TeachView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Text(
-                  "Todos tenemos algo para enseñar, esta es tu oportunidad",
+                  localeValues['teach_not_logged'],
                   style: theme.textTheme.headline4,
                 ),
               ),
@@ -66,7 +68,7 @@ class TeachView extends StatelessWidget {
                   shape: StadiumBorder(),
                   onPressed: () => model.navigateToSignUp(),
                   child: Text(
-                    "Enseñar",
+                    localeValues['teach'],
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
