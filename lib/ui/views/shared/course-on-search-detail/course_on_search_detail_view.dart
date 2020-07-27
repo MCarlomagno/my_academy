@@ -103,7 +103,7 @@ class CourseOnDetailView extends StatelessWidget {
                               itemCount: model.modules.length,
                               itemBuilder: (context, index) {
                                 var module = model.modules[index];
-                                return ModuleOnListView(module: module);
+                                return ModuleOnListView(module: module, fromOwner: false,);
                               },
                             ),
                           ),

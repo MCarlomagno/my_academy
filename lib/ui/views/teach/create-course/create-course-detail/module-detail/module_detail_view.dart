@@ -6,8 +6,9 @@ import 'package:stacked/stacked.dart';
 import 'module_detail_view_model.dart';
 
 class ModuleDetailView extends StatelessWidget {
-  const ModuleDetailView({Key key, @required this.module}) : super(key: key);
+  const ModuleDetailView({Key key, @required this.module,@required this.fromOwner}) : super(key: key);
   final Module module;
+  final bool fromOwner;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,7 @@ class ModuleDetailView extends StatelessWidget {
                             var currentClass = model.classes[index];
 
                             return InkWell(
-                              onTap: () => model.onClassSelected(currentClass),
+                              onTap: () => model.onClassSelected(currentClass, fromOwner),
                               child: Container(
                                 height: 138,
                                 padding: EdgeInsets.all(15),
@@ -138,7 +139,7 @@ class ModuleDetailView extends StatelessWidget {
               ],
             ),
           ),
-          floatingActionButton: FloatingActionButton.extended(
+         floatingActionButton: fromOwner? FloatingActionButton.extended(
               onPressed: () {
                 model.createClass(key);
               },
@@ -147,7 +148,7 @@ class ModuleDetailView extends StatelessWidget {
                   Icon(Icons.add),
                   Text(localeValues['create_class']),
                 ],
-              )),
+              )): Container(),
         );
       },
       viewModelBuilder: () => ModuleDetailViewModel(),

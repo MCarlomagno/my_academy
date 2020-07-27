@@ -8,9 +8,10 @@ import 'package:stacked/stacked.dart';
 import 'class_edit_view_model.dart';
 
 class ClassEditView extends StatelessWidget {
-  const ClassEditView({Key key, @required this.moduleId, this.classToEdit}) : super(key: key);
+  const ClassEditView({Key key, @required this.moduleId, this.classToEdit,@required this.fromOwner}) : super(key: key);
   final int moduleId;
   final Class classToEdit;
+  final bool fromOwner;
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ClassEditViewModel>.reactive(
@@ -19,7 +20,7 @@ class ClassEditView extends StatelessWidget {
         var localValues = AppLocalizations.of(context).values;
         return Scaffold(
           appBar: AppBar(
-            title: Text(localValues['edit_class']),
+            title: fromOwner? Text(localValues['edit_class']): Text(this.classToEdit.title),
             actions: <Widget>[
               Visibility(
                 visible:this.classToEdit == null,
@@ -41,6 +42,7 @@ class ClassEditView extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.all(15),
                         child: TextField(
+                          enabled: fromOwner,
                           controller: model.titleController,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
@@ -56,6 +58,7 @@ class ClassEditView extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: TextField(
+                          enabled: fromOwner,
                           controller: model.descriptionController,
                           minLines: 4,
                           maxLines: 5,

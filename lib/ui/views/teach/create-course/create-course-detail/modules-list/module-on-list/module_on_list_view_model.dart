@@ -9,8 +9,8 @@ import 'package:stacked_services/stacked_services.dart';
 class ModuleOnListViewModel extends BaseViewModel {
   NavigationService _navigationService = locator<NavigationService>();
 
-  openModuleDetail(Key key,Module module) async {
-    ModuleDetailViewArguments args = ModuleDetailViewArguments(module: module);
+  openModuleDetail(Key key,Module module, bool fromOwner) async {
+    ModuleDetailViewArguments args = ModuleDetailViewArguments(module: module, fromOwner: fromOwner);
     await _navigationService.navigateTo(Routes.moduleDetailView,arguments: args);
   }
 }
