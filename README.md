@@ -7,7 +7,7 @@
 
 # My Academy
 
-My Academy is an online courses mobile application written in flutter and available in Android and iOS. The main goal of the project is to create an open platform for people who want to create their own courses and share it with all the community.
+My Academy is an online courses mobile application written in flutter and available in Android and iOS. The main goal of the project is to create an open platform for people who want to build their own courses and share them with all the community.
 
 ## Built With
 
