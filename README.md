@@ -18,7 +18,14 @@ My Academy is an online courses mobile application written in flutter and availa
 
 ## Screenshots
 
-TODO
+<div align="center">
+<img src="https://raw.githubusercontent.com/MCarlomagno/assets/master/image_1.jpeg" alt="My Academy screen" width="300"/>
+<img src="https://raw.githubusercontent.com/MCarlomagno/assets/master/image_2.jpeg" alt="My Academy icon" width="300"/>
+</div>
+<div align="center">
+<img src="https://raw.githubusercontent.com/MCarlomagno/assets/master/image_3.jpeg" alt="My Academy icon" width="300"/>
+<img src="https://raw.githubusercontent.com/MCarlomagno/assets/master/image_4.jpeg" alt="My Academy icon" width="300"/>
+</div>
 
 ## Licence
 BSD 3-Clause License
