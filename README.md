@@ -1,33 +1,24 @@
-# my_academy
 
-## Summary
-TODO: add cool summary
-A new Flutter project.
+<div align="center">
+<img src="https://raw.githubusercontent.com/MCarlomagno/my_academy/master/assets/launcher/icon.png" alt="My Academy icon" width="300"/>
+</div>
 
-## Installation
-TODO: add cool Installation guide
 
-## Considerations
-TODO: add cool Considerations
 
-## Getting Started
+# My Academy
 
-This project is a starting point for a Flutter application.
+My Academy is an online courses mobile application written in flutter and available in Android and iOS. The main goal of the project is to create an open platform for people who want to create their own courses and share it with all the community.
 
-A few resources to get you started if this is your first Flutter project:
+## Built With
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-## Usage
-TODO: add cool usage guide
+* [Flutter](https://flutter.dev/) - Frontend framework.
+* [Go](https://golang.org/) - Backend language.
+* [gin-gonic](https://github.com/gin-gonic/gin) - Backend web framework.
+* [PostgreSQL](https://www.postgresql.org/) - Database.
 
 ## Screenshots
-TODO: add cool screenshots
+
+TODO
 
 ## Licence
 BSD 3-Clause License
